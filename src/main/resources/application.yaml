@@ -1,0 +1,18 @@
+server:
+  port: 8887
+github:
+  client:
+    id: 941f7eaea0ba6ee610f1
+    secret: 72ca7c944db192e9c1ebac2fc2d44fed510c731f
+  redirect:
+    uri: http://localhost:8887/callback
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/community?characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 123456
+mybatis-plus:
+  mapper-locations: classpath:mapper/*
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

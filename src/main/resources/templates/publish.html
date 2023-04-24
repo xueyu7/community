@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>发布 - 进步社区</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community.css">
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+
+</head>
+<body>
+<nav class="navbar navbar-default navbar-color">
+    <div class="container-fluid container-margin">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">进步社区</span>
+            </button>
+            <a class="navbar-brand navbar-font-color" href="#">进步社区</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="搜索问题">
+                </div>
+                <button type="submit" class="btn btn-default btn-color">搜索</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li th:if="${session.user==null}">
+                    <div class="aw-user-nav">
+                        <a class="login btn btn-small btn-primary btn-primary-color"
+                           href="https://github.com/login/oauth/authorize?client_id=941f7eaea0ba6ee610f1&redirect_uri=http://localhost:8887/callback&state=1">登录</a>
+                    </div>
+                </li>
+                <li th:if="${session.user!=null}">
+                    <div class="aw-user-nav">
+                        <a class="login btn btn-small btn-primary btn-primary-color" href="publish">发起</a>
+                    </div>
+                </li>
+                <li class="dropdown" th:if="${session.user!=null}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">消息中心</a></li>
+                        <li><a href="#">个人资料</a></li>
+                        <li><a href="#">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="aw-container-wrap">
+    <div class="container aw-publish">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content">
+                    <ul class="nav nav-tabs aw-nav-tabs active">
+                        <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起</h2>
+                    </ul>
+                    <form action="publish" method="post">
+                        <div class="aw-mod aw-mod-publish">
+                            <div class="mod-body">
+                                <div class="form-group">
+                                    <h3>问题标题（简单扼要）:</h3>
+                                    <input type="text" class="form-control" id="title" name="title" th:value="${title}"
+                                           placeholder="问题标题...">
+                                </div>
+                                <div class="form-group">
+                                    <h3>问题补充 (必填，请参照右侧提示):</h3>
+                                    <textarea class="form-control" name="description" id="description" cols="30"
+                                              rows="10" th:text="${description}"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <h3>添加标签:</h3>
+                                    <input type="text" class="form-control" id="tag" name="tag" th:value="${tag}"
+                                           placeholder="输入标签，以，分隔">
+                                </div>
+                            </div>
+                            <div class="mod-footer clearfix">
+                                <div class="alert alert-danger alert-left alert-center" th:if="${error==null}"
+                                     th:text="${error}"></div>
+                                <div class="alert-right">
+                                    <button type="submit" class="btn btn-large btn-success btn-publish">确认发起</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+                    <!-- 问题发起指南 -->
+                    <div class="aw-mod publish-help">
+                        <div class="mod-head">
+                            <h3>问题发起指南</h3>
+                        </div>
+                        <div class="mod-body">
+                            <p><b>• 问题标题:</b> 请用<b style="color:red">精简</b>的语言描述您发布的问题，不超过25字</p>
+                            <p><b>• 问题补充:</b> 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料：
+                            <li>服务器运行环境信息；</li>
+                            <li>软件版本；</li>
+                            <li>问题发生的上下文信息；</li>
+                            <li>可以完整复现问题的代码（如可直接运行于 Kibana Console 的复现流程）；</li>
+                            <li>补充完整的异常和错误信息；</li>
+                            <li>注意阅读格式友好，代码和异常信息请用代码标签格式化张贴；</li>
+
+                            </p>
+                            <p><b>• 选择标签:</b> 选择一个或者多个合适的标签，不超过<b style="color:red">10</b>个字</p>
+                        </div>
+                    </div>
+                    <!-- end 问题发起指南 -->
+                </div>
+                <!-- end 侧边栏 -->
+            </div>
+        </div>
+        <div style="height: 100px"></div>
+    </div>
+</div>
+</body>
+</html>

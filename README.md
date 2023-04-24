@@ -23,6 +23,20 @@ CREATE TABLE USER
   `gmt_modified` bigint(0),
   PRIMARY KEY (`id`)
 );
+CREATE TABLE QUESTION
+(
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50),
+  `description` text,
+  `gmt_create` bigint(0),
+  `gmt_modified` bigint(0),
+  `creator` int(0),
+  `comment_count` int(0),
+  `view_count` int(0),
+  `like_count` int(0),
+  `tag` varchar(255),
+  PRIMARY KEY (`id`) USING BTREE
+)
 ```
 
 
