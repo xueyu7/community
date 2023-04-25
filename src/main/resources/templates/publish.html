@@ -32,7 +32,9 @@
                 <li th:if="${session.user==null}">
                     <div class="aw-user-nav">
                         <a class="login btn btn-small btn-primary btn-primary-color"
-                           href="https://github.com/login/oauth/authorize?client_id=941f7eaea0ba6ee610f1&redirect_uri=http://localhost:8887/callback&state=1">登录</a>
+                           href="https://gitee.com/oauth/authorize?client_id=2026808b153886ae6c2c1a6bbabbf2de7f75e03588fcc6ce707e46c2c1e7d3be&redirect_uri=http://localhost:8887/callback&response_type=code&state=1">登录</a>
+                        <!--                        <a class="login btn btn-small btn-primary btn-primary-color"-->
+                        <!--                           href="https://github.com/login/oauth/authorize?client_id=941f7eaea0ba6ee610f1&redirect_uri=http://localhost:8887/callback&state=1">登录</a>-->
                     </div>
                 </li>
                 <li th:if="${session.user!=null}">
@@ -81,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="mod-footer clearfix">
-                                <div class="alert alert-danger alert-left alert-center" th:if="${error==null}"
+                                <div class="alert alert-danger alert-left alert-center" th:if="${error!=null}"
                                      th:text="${error}"></div>
                                 <div class="alert-right">
                                     <button type="submit" class="btn btn-large btn-success btn-publish">确认发起</button>

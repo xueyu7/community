@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties("github")
+//@ConfigurationProperties("github")
+@ConfigurationProperties("gitee")
 public class AccessTokenDTO {
     private String client_id;
     private String client_secret;

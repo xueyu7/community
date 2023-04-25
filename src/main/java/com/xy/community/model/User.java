@@ -15,6 +15,7 @@ public class User {
     private String name;
     private String accountId;
     private String token;
+    private String avatarUrl;
 
     //字段填充内容
     @TableField(fill = FieldFill.INSERT)

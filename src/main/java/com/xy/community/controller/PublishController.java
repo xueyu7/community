@@ -39,6 +39,23 @@ public class PublishController {
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
 
+        User user = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length != 0)
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    String token = cookie.getValue();
+                    user = userDao.findByToken(token);
+                    if (user != null) {
+                        request.getSession().setAttribute("user", user);
+                    }
+                    break;
+                }
+            }
+        if (user == null) {
+            model.addAttribute("error", "用户未登录！");
+            return "publish";
+        }
         if (title == null || title == "") {
             model.addAttribute("error", "标题不能为空");
             return "publish";
@@ -49,23 +66,6 @@ public class PublishController {
         }
         if (tag == null || tag == "") {
             model.addAttribute("error", "标签不能为空");
-            return "publish";
-        }
-        User user = null;
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("token")) {
-                String token = cookie.getValue();
-                user = userDao.findByToken(token);
-                if (user != null) {
-                    request.getSession().setAttribute("user", user);
-                }
-                break;
-            }
-        }
-
-        if (user == null) {
-            model.addAttribute("error", "用户未登录！");
             return "publish";
         }
 

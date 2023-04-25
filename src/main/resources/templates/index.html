@@ -32,7 +32,9 @@
                 <li th:if="${session.user==null}">
                     <div class="aw-user-nav">
                         <a class="login btn btn-small btn-primary btn-primary-color"
-                           href="https://github.com/login/oauth/authorize?client_id=941f7eaea0ba6ee610f1&redirect_uri=http://localhost:8887/callback&state=1">登录</a>
+                           href="https://gitee.com/oauth/authorize?client_id=2026808b153886ae6c2c1a6bbabbf2de7f75e03588fcc6ce707e46c2c1e7d3be&redirect_uri=http://localhost:8887/callback&response_type=code&state=1">登录</a>
+                        <!--                        <a class="login btn btn-small btn-primary btn-primary-color"-->
+                        <!--                           href="https://github.com/login/oauth/authorize?client_id=941f7eaea0ba6ee610f1&redirect_uri=http://localhost:8887/callback&state=1">登录</a>-->
                     </div>
                 </li>
                 <li th:if="${session.user!=null}">
@@ -53,5 +55,55 @@
         </div>
     </div>
 </nav>
+<div class="aw-container-wrap">
+    <div class="container aw-publish">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content">
+                    <ul class="nav nav-tabs aw-nav-tabs active">
+                        <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 发现</h2>
+                    </ul>
+                    <div class="aw-mod aw-mod-publish">
+                        <div class="mod-body">
+
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object img-thumbnail"
+                                             src="https://avatars.githubusercontent.com/u/129240587?v=4">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">如何快速学习spring boot</h4>
+                                    <p>
+                                        • <a href="#" class="aw-user-name">xueyu</a>
+                                        <span class="text-color-999">发表了文章 • 0 个评论 • 204 次浏览 • 22 小时前</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+
+
+                        <div class="mod-footer clearfix">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+                    <div class="aw-mod publish-help">
+                        <div class="mod-head">
+                            <h3>热门话题</h3>
+                        </div>
+                        <div class="mod-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height: 100px"></div>
+    </div>
+</div>
 </body>
 </html>

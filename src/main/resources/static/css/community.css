@@ -89,3 +89,12 @@ body {
 .alert-center{
     text-align: center;
 }
+
+.mod-body{
+    margin-top: 20px;
+}
+
+.media-object{
+    width: 60px;
+    height: 60px;
+}
