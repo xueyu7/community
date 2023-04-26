@@ -33,15 +33,15 @@ public class AuthorizeController {
         accessTokenDTO.setCode(code);
         accessTokenDTO.setState(state);
         String accessToken = giteeProvider.getAccessToken(accessTokenDTO);
-        System.out.println(accessToken);
         GiteeUser giteeUser = giteeProvider.getUser(accessToken);
+
         if (giteeUser != null) {
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setName(giteeUser.getName());
             user.setAccountId(String.valueOf(giteeUser.getId()));
-            user.setAvatarUrl(giteeUser.getAvatarUrl());
+            user.setAvatarUrl(giteeUser.getAvatar_url());
             //写入session =>写入数据库
             userDao.insert(user);
             //写入cookie =>response里添加cookie的name+value

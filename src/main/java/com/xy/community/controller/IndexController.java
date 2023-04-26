@@ -1,7 +1,11 @@
 package com.xy.community.controller;
 
+import com.xy.community.dao.QuestionDao;
 import com.xy.community.dao.UserDao;
+import com.xy.community.dto.QuestionDTO;
+import com.xy.community.model.Question;
 import com.xy.community.model.User;
+import com.xy.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -17,8 +22,11 @@ public class IndexController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private QuestionService questionService;
+
     @GetMapping("/")
-    public String hello(HttpServletRequest request) {
+    public String hello(HttpServletRequest request, Model model) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length != 0)
             for (Cookie cookie : cookies) {
@@ -31,6 +39,8 @@ public class IndexController {
                     break;
                 }
             }
+        List<QuestionDTO> questionList = questionService.selectList();
+        model.addAttribute("questions", questionList);
         return "index";
     }
 }

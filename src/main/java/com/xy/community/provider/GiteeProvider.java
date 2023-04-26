@@ -1,6 +1,7 @@
 package com.xy.community.provider;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.xy.community.dto.AccessTokenDTO;
 import com.xy.community.dto.GiteeUser;
 import okhttp3.*;
@@ -17,15 +18,25 @@ public class GiteeProvider {
         OkHttpClient client = new OkHttpClient();
 
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
-        String url = "https://gitee.com/oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code";
-        url=String.format(url,accessTokenDTO.getClient_id(),accessTokenDTO.getRedirect_uri());
+//        String url = "https://gitee.com/oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code";
+//        url=String.format(url,accessTokenDTO.getClient_id(),accessTokenDTO.getRedirect_uri());
+//        Request request = new Request.Builder()
+//                .url(url)
+//                .post(body)
+//                .build();
         Request request = new Request.Builder()
-                .url(url)
+                .url("https://gitee.com/oauth/token?grant_type=authorization_code&" +
+                        "code=" + accessTokenDTO.getCode() + "&" +
+                        "client_id=" + accessTokenDTO.getClient_id() + "&" +
+                        "redirect_uri=" + accessTokenDTO.getRedirect_uri() + "&" +
+                        "client_secret=" + accessTokenDTO.getClient_secret())
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String str = response.body().string();
-            String token = str.split("&")[0].split("=")[1];
+//            JSONObject jsonObject = JSON.parseObject(str);
+//            return jsonObject.getString("access_token");
+            String token = str.split("\"")[3];
             return token;
         } catch (Exception e) {
             e.printStackTrace();

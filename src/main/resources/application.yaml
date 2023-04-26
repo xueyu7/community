@@ -1,17 +1,9 @@
 server:
   port: 8887
-github:
-  client:
-    id: 941f7eaea0ba6ee610f1
-    secret: 72ca7c944db192e9c1ebac2fc2d44fed510c731f
-  redirect:
-    uri: http://localhost:8887/callback
 gitee:
-  client:
-    id: 2026808b153886ae6c2c1a6bbabbf2de7f75e03588fcc6ce707e46c2c1e7d3be
-    secret: 51da92666daa2d6da41d3d9e3c3af50d2a4ed6ba85a5b3a3aa5fca091c5dbdf8
-  redirect:
-    uri: http://localhost:8887/callback
+  client-id: 2026808b153886ae6c2c1a6bbabbf2de7f75e03588fcc6ce707e46c2c1e7d3be
+  client-secret: 51da92666daa2d6da41d3d9e3c3af50d2a4ed6ba85a5b3a3aa5fca091c5dbdf8
+  redirect-uri: http://localhost:8887/callback
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

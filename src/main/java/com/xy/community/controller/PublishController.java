@@ -73,6 +73,7 @@ public class PublishController {
         question.setTitle(title);
         question.setDescription(description);
         question.setTag(tag);
+        question.setCreator(user.getId());
         questionDao.insert(question);
         return "redirect:/";
     }
