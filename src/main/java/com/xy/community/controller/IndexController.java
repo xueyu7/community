@@ -2,6 +2,7 @@ package com.xy.community.controller;
 
 import com.xy.community.dao.QuestionDao;
 import com.xy.community.dao.UserDao;
+import com.xy.community.dto.PaginationDTO;
 import com.xy.community.dto.QuestionDTO;
 import com.xy.community.model.Question;
 import com.xy.community.model.User;
@@ -26,7 +27,10 @@ public class IndexController {
     private QuestionService questionService;
 
     @GetMapping("/")
-    public String hello(HttpServletRequest request, Model model) {
+    public String hello(HttpServletRequest request,
+                        @RequestParam(name = "page", defaultValue = "1") Integer page,
+                        @RequestParam(name = "size", defaultValue = "5") Integer size,
+                        Model model) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length != 0)
             for (Cookie cookie : cookies) {
@@ -39,8 +43,8 @@ public class IndexController {
                     break;
                 }
             }
-        List<QuestionDTO> questionList = questionService.selectList();
-        model.addAttribute("questions", questionList);
+        PaginationDTO pagination = questionService.list(page, size);
+        model.addAttribute("pagination", pagination);
         return "index";
     }
 }

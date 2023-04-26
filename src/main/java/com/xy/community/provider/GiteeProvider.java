@@ -1,11 +1,9 @@
 package com.xy.community.provider;
 
 import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
 import com.xy.community.dto.AccessTokenDTO;
 import com.xy.community.dto.GiteeUser;
 import okhttp3.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -52,7 +50,6 @@ public class GiteeProvider {
         try {
             Response response = client.newCall(request).execute();
             String str = response.body().string();
-            System.out.println(str);
             GiteeUser giteeUser = JSON.parseObject(str, GiteeUser.class);    //ctrl+ALT+V
             return giteeUser;
         } catch (IOException e) {

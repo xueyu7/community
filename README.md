@@ -10,6 +10,7 @@
 
 ## 工具
 [Visual Paradigm](https://www.visual-paradigm.com)  
+[JRebel 热部署](https://blog.csdn.net/yy139926/article/details/125655925)
 
 ## 脚本
 ```sql
@@ -19,6 +20,7 @@ CREATE TABLE USER
   `account_id` varchar(100),
   `name` varchar(50),
   `token` char(36),
+  `avatar_url` varchar(255),
   `gmt_create` bigint(0),
   `gmt_modified` bigint(0),
   PRIMARY KEY (`id`)
@@ -28,14 +30,14 @@ CREATE TABLE QUESTION
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `title` varchar(50),
   `description` text,
-  `gmt_create` bigint(0),
-  `gmt_modified` bigint(0),
-  `creator` int(0),
-  `comment_count` int(0),
-  `view_count` int(0),
-  `like_count` int(0),
   `tag` varchar(255),
-  PRIMARY KEY (`id`) USING BTREE
+  `creator` int(0), 
+  `view_count` int(0) DEFAULT 0,
+  `comment_count` int(0) DEFAULT 0,
+  `like_count` int(0) DEFAULT 0,
+  `gmt_create` bigint(0),
+  `gmt_modified` bigint(0),  
+  PRIMARY KEY (`id`)
 )
 ```
 
