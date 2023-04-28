@@ -12,49 +12,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-color">
-    <div class="container-fluid container-margin">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">进步社区</span>
-            </button>
-            <a class="navbar-brand navbar-font-color" href="#">进步社区</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="搜索问题">
-                </div>
-                <button type="submit" class="btn btn-default btn-color">搜索</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user==null}">
-                    <div class="aw-user-nav">
-                        <a class="login btn btn-small btn-primary btn-primary-color"
-                           href="https://gitee.com/oauth/authorize?client_id=2026808b153886ae6c2c1a6bbabbf2de7f75e03588fcc6ce707e46c2c1e7d3be&redirect_uri=http://localhost:8887/callback&response_type=code&state=1">登录</a>
-                        <!--                        <a class="login btn btn-small btn-primary btn-primary-color"-->
-                        <!--                           href="https://github.com/login/oauth/authorize?client_id=941f7eaea0ba6ee610f1&redirect_uri=http://localhost:8887/callback&state=1">登录</a>-->
-                    </div>
-                </li>
-                <li th:if="${session.user!=null}">
-                    <div class="aw-user-nav">
-                        <a class="login btn btn-small btn-primary btn-primary-color" href="publish">发起</a>
-                    </div>
-                </li>
-                <li class="dropdown" th:if="${session.user!=null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">消息中心</a></li>
-                        <li><a href="#">个人资料</a></li>
-                        <li><a href="#">退出登录</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:insert="navigation :: nav"></div>
 <div class="aw-container-wrap">
     <div class="container aw-publish">
         <div class="row">
@@ -108,7 +66,6 @@
                             <li>可以完整复现问题的代码（如可直接运行于 Kibana Console 的复现流程）；</li>
                             <li>补充完整的异常和错误信息；</li>
                             <li>注意阅读格式友好，代码和异常信息请用代码标签格式化张贴；</li>
-
                             </p>
                             <p><b>• 选择标签:</b> 选择一个或者多个合适的标签，不超过<b style="color:red">10</b>个字</p>
                         </div>

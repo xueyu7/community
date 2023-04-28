@@ -10,4 +10,6 @@ import java.util.List;
 public interface QuestionDao extends BaseMapper<Question> {
 
     List<Question> list(Integer offset, Integer size);
+
+    List<Question> listByUserId(Integer offset, Integer size, Integer id);
 }

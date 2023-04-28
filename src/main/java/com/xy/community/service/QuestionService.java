@@ -1,7 +1,6 @@
 package com.xy.community.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xy.community.dao.QuestionDao;
 import com.xy.community.dao.UserDao;
 import com.xy.community.dto.PaginationDTO;
@@ -29,9 +28,44 @@ public class QuestionService {
         Integer count = questionDao.selectCount(null);
         paginationDTO.setPagination(count, size, page);
 
+        if (page < 1) {
+            page = 1;
+        }
+        if (page > paginationDTO.getTotalPage()) {
+            page = paginationDTO.getTotalPage();
+        }
 
         Integer offset = (page - 1) * size;
         List<Question> questions = questionDao.list(offset, size);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        for (Question question : questions) {
+            User user = userDao.selectById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question, questionDTO);
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+        }
+        paginationDTO.setQuestions(questionDTOList);
+        return paginationDTO;
+    }
+
+    public PaginationDTO list(Integer page, Integer size, Integer id) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        wrapper.eq("creator", id);
+        Integer count = questionDao.selectCount(wrapper);
+        paginationDTO.setPagination(count, size, page);
+
+        if (page < 1) {
+            page = 1;
+        }
+        if (page > paginationDTO.getTotalPage()) {
+            page = paginationDTO.getTotalPage();
+        }
+
+        Integer offset = (page - 1) * size;
+        List<Question> questions = questionDao.listByUserId(offset, size, id);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             User user = userDao.selectById(question.getCreator());

@@ -25,6 +25,13 @@ public class PaginationDTO {
             totalPage = totalCount / size + 1;
         }
 
+        if (page<1){
+            page=1;
+        }
+        if (page>totalPage){
+            page=totalPage;
+        }
+
         this.page = page;
 
         //当前页左3右3

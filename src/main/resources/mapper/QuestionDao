@@ -7,5 +7,8 @@
     <select id="list" resultType="com.xy.community.model.Question">
         select * from question limit #{offset},#{size}
     </select>
+    <select id="listByUserId" resultType="com.xy.community.model.Question">
+        select * from question where creator=#{id} limit #{offset},#{size}
+    </select>
 </mapper>
 
