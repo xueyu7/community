@@ -23,11 +23,24 @@ public class QuestionService {
     private QuestionDao questionDao;
 
     public PaginationDTO list(Integer page, Integer size) {
-
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer count = questionDao.selectCount(null);
-        paginationDTO.setPagination(count, size, page);
+        paginationProcess(paginationDTO, count, page, size);
+        return paginationDTO;
+    }
 
+    public PaginationDTO list(Integer page, Integer size, Integer id) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        wrapper.eq("creator", id);
+
+        Integer count = questionDao.selectCount(wrapper);
+        paginationProcess(paginationDTO, count, page, size);
+        return paginationDTO;
+    }
+
+    public void paginationProcess(PaginationDTO paginationDTO, Integer count, Integer page, Integer size) {
+        paginationDTO.setPagination(count, size, page);
         if (page < 1) {
             page = 1;
         }
@@ -46,35 +59,22 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         }
         paginationDTO.setQuestions(questionDTOList);
-        return paginationDTO;
     }
 
-    public PaginationDTO list(Integer page, Integer size, Integer id) {
-        PaginationDTO paginationDTO = new PaginationDTO();
+    public QuestionDTO selectById(Integer id) {
+        Question question = questionDao.selectById(id);
+        User user = userDao.selectById(question.getCreator());
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question, questionDTO);
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
 
-        QueryWrapper<Question> wrapper = new QueryWrapper<>();
-        wrapper.eq("creator", id);
-        Integer count = questionDao.selectCount(wrapper);
-        paginationDTO.setPagination(count, size, page);
-
-        if (page < 1) {
-            page = 1;
+    public void createOrUpdate(Question question) {
+        if (question.getId()==null){
+            questionDao.insert(question);
+        }else {
+            questionDao.updateById(question);
         }
-        if (page > paginationDTO.getTotalPage()) {
-            page = paginationDTO.getTotalPage();
-        }
-
-        Integer offset = (page - 1) * size;
-        List<Question> questions = questionDao.listByUserId(offset, size, id);
-        List<QuestionDTO> questionDTOList = new ArrayList<>();
-        for (Question question : questions) {
-            User user = userDao.selectById(question.getCreator());
-            QuestionDTO questionDTO = new QuestionDTO();
-            BeanUtils.copyProperties(question, questionDTO);
-            questionDTO.setUser(user);
-            questionDTOList.add(questionDTO);
-        }
-        paginationDTO.setQuestions(questionDTOList);
-        return paginationDTO;
     }
 }

@@ -7,5 +7,8 @@
     <select id="findByToken" resultType="com.xy.community.model.User">
         select * from user where token=#{token}
     </select>
+    <select id="findByAccountId" resultType="com.xy.community.model.User">
+        select * from user where account_id=#{accountId}
+    </select>
 </mapper>
 

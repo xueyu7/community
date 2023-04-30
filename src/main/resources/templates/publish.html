@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>发布 - 进步社区</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/community.css">
-    <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
 
 </head>
 <body>
@@ -21,7 +21,8 @@
                     <ul class="nav nav-tabs aw-nav-tabs active">
                         <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起</h2>
                     </ul>
-                    <form action="publish" method="post">
+                    <form action="/publish" method="post">
+                        <input type="hidden" name="id" th:value="${id}">
                         <div class="aw-mod aw-mod-publish">
                             <div class="mod-body">
                                 <div class="form-group">

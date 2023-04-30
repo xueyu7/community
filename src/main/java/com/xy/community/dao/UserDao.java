@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface UserDao extends BaseMapper<User> {
 
     User findByToken(@Param("token") String token);
+
+    User findByAccountId(String accountId);
 }

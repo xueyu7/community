@@ -76,7 +76,7 @@ body {
     border-left: 1px solid #e6e6e6;
 }
 
-.alert-left{
+.alert-left {
     float: left;
     width: calc(100% - 130px);
 }
@@ -86,39 +86,52 @@ body {
     width: 130px;
 }
 
-.alert-center{
+.alert-center {
     text-align: center;
 }
 
-.mod-body{
+.mod-body {
     margin-top: 20px;
 }
 
-.media-object{
+.media-object {
     width: 60px;
     height: 60px;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav > li > a {
     color: #f4f4f4;
 }
 
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
-    background-image: linear-gradient(to bottom,#59b0ff 0,#59b0ff 100%);
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a {
+    background-image: linear-gradient(to bottom, #59b0ff 0, #59b0ff 100%);
 }
 
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
     color: #fefefe;
 }
 
-.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
     color: #d3d5d7;
 }
 
-.dropdown-menu>li>a {
+.dropdown-menu > li > a {
     padding: 3px 10px;
     font-weight: 500;
     line-height: 2.5;
     color: #333;
     text-align: center;
+}
+
+.text-username {
+    width: 60px;
+    text-align: center;
+}
+
+.edit-font {
+    font-size: 13px;
+}
+
+.mod-body-margin{
+    margin-bottom: 20px;
 }
