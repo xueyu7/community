@@ -36,7 +36,7 @@
                                     </h4>
                                     <p>
                                         • <a href="" class="aw-user-name" th:text="${question.user.name}"></a>
-                                        <span class="text-color-999">发表了文章 • [[${question.commentCount}]] 个评论 • [[${question.viewCount}]] 次浏览 • [[${question.viewCount}]] 个点赞
+                                        <span class="text-color-999">发表了文章 • [[${question.commentCount}]] 个评论 • [[${question.viewCount}]] 次浏览 • [[${question.likeCount}]] 个点赞
                                             • <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
                                     </p>
                                 </div>

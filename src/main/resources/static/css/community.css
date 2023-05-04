@@ -135,3 +135,8 @@ body {
 .mod-body-margin{
     margin-bottom: 20px;
 }
+
+.jumbotron{
+    margin: 60px 100px;
+    background: url(../img/bg.jpg) repeat;
+}

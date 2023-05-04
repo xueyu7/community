@@ -5,6 +5,8 @@ import com.xy.community.dao.QuestionDao;
 import com.xy.community.dao.UserDao;
 import com.xy.community.dto.PaginationDTO;
 import com.xy.community.dto.QuestionDTO;
+import com.xy.community.exception.CustomizeErrorCode;
+import com.xy.community.exception.CustomizeException;
 import com.xy.community.model.Question;
 import com.xy.community.model.User;
 import org.springframework.beans.BeanUtils;
@@ -63,6 +65,9 @@ public class QuestionService {
 
     public QuestionDTO selectById(Integer id) {
         Question question = questionDao.selectById(id);
+        if (question == null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         User user = userDao.selectById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
@@ -71,10 +76,23 @@ public class QuestionService {
     }
 
     public void createOrUpdate(Question question) {
-        if (question.getId()==null){
+        if (question.getId() == null) {
             questionDao.insert(question);
-        }else {
-            questionDao.updateById(question);
+        } else {
+            int update = questionDao.updateById(question);
+            if (update!=1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
+    }
+
+    public void incView(Integer id) {
+        Question question =new Question();
+        question.setId(id);
+        questionDao.incView(question);
+        //高并发问题
+//        Question question = questionDao.selectById(id);
+//        question.setViewCount(question.getViewCount()+1);
+//        questionDao.updateById(question);
     }
 }
