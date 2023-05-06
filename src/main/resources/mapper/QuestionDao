@@ -9,6 +9,8 @@
     </select>
     <update id="incView" parameterType="com.xy.community.model.Question">
         update question set view_count=view_count+1 where id=#{id}
+    </update><update id="incComment" parameterType="com.xy.community.model.Question">
+        update question set comment_count=comment_count+1 where id=#{id}
     </update>
 </mapper>
 

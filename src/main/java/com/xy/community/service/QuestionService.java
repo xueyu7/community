@@ -1,6 +1,7 @@
 package com.xy.community.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.xy.community.dao.QuestionDao;
 import com.xy.community.dao.UserDao;
 import com.xy.community.dto.PaginationDTO;
