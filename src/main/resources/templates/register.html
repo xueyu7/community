@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册-进步社区</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+<div class="aw-register-box aw-register-open-box">
+    <div class="mod-head">
+        <h1>注册</h1>
+    </div>
+    <div class="mod-body">
+        <form method="post"  action="">
+            <ul>
+                <li>
+                    <input name="user_name" class="aw-register-name form-control" type="text" placeholder="用户名" value="" />
+                </li>
+                <li>
+                    <input name="email" class="aw-register-email form-control" type="text" placeholder="邮箱" value="" />
+                </li>
+                <li>
+                    <input name="password" class="aw-register-pwd form-control" type="password" placeholder="密码" />
+                </li>
+                <li>
+                    <button class="btn btn-large btn-blue btn-block">确认注册</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+<div th:insert="footer::footer"></div>
+</body>
+</html>

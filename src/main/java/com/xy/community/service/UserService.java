@@ -1,5 +1,6 @@
 package com.xy.community.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xy.community.dao.UserDao;
 import com.xy.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ public class UserService {
     private UserDao userDao;
 
     public void createOrUpdate(User user) {
-        User dbUser = userDao.findByAccountId(user.getAccountId());
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("account_id",user.getAccountId());
+        User dbUser = userDao.selectOne(wrapper);
         if (dbUser==null){
             userDao.insert(user);
         }else {

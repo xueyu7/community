@@ -9,7 +9,15 @@
     <link rel="stylesheet" href="css/community.css">
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/common.css">
-
+    <script type="application/javascript">
+        window.onload = function () {
+            var closable = window.localStorage.getItem("closable");
+            if (closable == "true") {
+                window.close();
+                window.localStorage.removeItem("closable");
+            }
+        }
+    </script>
 </head>
 <body>
 <div th:insert="navigation :: nav"></div>
@@ -22,6 +30,7 @@
                         <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 发现</h2>
                     </ul>
                     <div class="aw-mod aw-mod-publish">
+                        <!--问题列表-->
                         <div class="mod-body">
 
                             <div class="media" th:each="question : ${pagination.questions}">
@@ -44,6 +53,7 @@
                             </div>
 
                         </div>
+                        <!--分页-->
                         <div class="mod-footer clearfix">
 
                             <nav aria-label="Page navigation">
@@ -90,8 +100,8 @@
                 </div>
             </div>
         </div>
-        <div style="height: 100px"></div>
     </div>
 </div>
+<div th:insert="footer::footer"></div>
 </body>
 </html>

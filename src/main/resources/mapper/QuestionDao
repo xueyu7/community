@@ -7,9 +7,13 @@
     <select id="list" resultType="com.xy.community.model.Question">
         select * from question limit #{offset},#{size}
     </select>
+    <select id="listByUserId" resultType="com.xy.community.model.Question">
+        select * from question where creator=#{id} limit #{offset},#{size}
+    </select>
     <update id="incView" parameterType="com.xy.community.model.Question">
         update question set view_count=view_count+1 where id=#{id}
-    </update><update id="incComment" parameterType="com.xy.community.model.Question">
+    </update>
+    <update id="incComment" parameterType="com.xy.community.model.Question">
         update question set comment_count=comment_count+1 where id=#{id}
     </update>
 </mapper>

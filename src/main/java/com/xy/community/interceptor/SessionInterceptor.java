@@ -1,5 +1,6 @@
 package com.xy.community.interceptor;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xy.community.dao.UserDao;
 import com.xy.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,9 @@ public class SessionInterceptor implements HandlerInterceptor {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("token")) {
                     String token = cookie.getValue();
-                    User user = userDao.findByToken(token);
+                    QueryWrapper wrapper=new QueryWrapper();
+                    wrapper.eq("token",token);
+                    User user = userDao.selectOne(wrapper);
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
                     }

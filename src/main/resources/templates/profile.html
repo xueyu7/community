@@ -31,7 +31,7 @@
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <a href=""><h4 class="media-heading" th:text="${question.title}"></h4></a>
+                                    <a th:href="@{'/question/'+${question.id}}"><h4 class="media-heading" th:text="${question.title}"></h4></a>
                                     <p>
                                         • <a href="" class="aw-user-name" th:text="${question.user.name}"></a>
                                         <span class="text-color-999">
@@ -107,8 +107,8 @@
                 </div>
             </div>
         </div>
-        <div style="height: 100px"></div>
     </div>
 </div>
+<div th:insert="footer::footer"></div>
 </body>
 </html>

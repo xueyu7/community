@@ -1,7 +1,6 @@
 package com.xy.community.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.xy.community.dao.QuestionDao;
 import com.xy.community.dao.UserDao;
 import com.xy.community.dto.PaginationDTO;
@@ -28,7 +27,13 @@ public class QuestionService {
     public PaginationDTO list(Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer count = questionDao.selectCount(null);
-        paginationProcess(paginationDTO, count, page, size);
+        Integer offset = paginationProcess(paginationDTO, count, page, size);
+        QueryWrapper<Question> wrapper=new QueryWrapper<>();
+        wrapper.last("limit "+offset+","+size)
+                .orderByDesc("gmt_create");
+        List<Question> questions = questionDao.selectList(wrapper);
+//        List<Question> questions = questionDao.list(offset, size);
+        copyToQuestionDTO(paginationDTO, questions);
         return paginationDTO;
     }
 
@@ -36,13 +41,17 @@ public class QuestionService {
         PaginationDTO paginationDTO = new PaginationDTO();
         QueryWrapper<Question> wrapper = new QueryWrapper<>();
         wrapper.eq("creator", id);
-
         Integer count = questionDao.selectCount(wrapper);
-        paginationProcess(paginationDTO, count, page, size);
+        Integer offset = paginationProcess(paginationDTO, count, page, size);
+        wrapper.last("limit "+offset+","+size)
+                .orderByDesc("gmt_create");
+        List<Question> questions = questionDao.selectList(wrapper);
+//        List<Question> questions = questionDao.listByUserId(id, offset, size);
+        copyToQuestionDTO(paginationDTO, questions);
         return paginationDTO;
     }
 
-    public void paginationProcess(PaginationDTO paginationDTO, Integer count, Integer page, Integer size) {
+    public Integer paginationProcess(PaginationDTO paginationDTO, Integer count, Integer page, Integer size) {
         paginationDTO.setPagination(count, size, page);
         if (page < 1) {
             page = 1;
@@ -50,9 +59,11 @@ public class QuestionService {
         if (page > paginationDTO.getTotalPage()) {
             page = paginationDTO.getTotalPage();
         }
-
         Integer offset = (page - 1) * size;
-        List<Question> questions = questionDao.list(offset, size);
+        return offset;
+    }
+
+    private void copyToQuestionDTO(PaginationDTO paginationDTO, List<Question> questions) {
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             User user = userDao.selectById(question.getCreator());
@@ -63,6 +74,7 @@ public class QuestionService {
         }
         paginationDTO.setQuestions(questionDTOList);
     }
+
 
     public QuestionDTO selectById(Integer id) {
         Question question = questionDao.selectById(id);
@@ -81,14 +93,14 @@ public class QuestionService {
             questionDao.insert(question);
         } else {
             int update = questionDao.updateById(question);
-            if (update!=1){
+            if (update != 1) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
     }
 
     public void incView(Integer id) {
-        Question question =new Question();
+        Question question = new Question();
         question.setId(id);
         questionDao.incView(question);
         //高并发问题

@@ -132,11 +132,44 @@ body {
     font-size: 13px;
 }
 
-.mod-body-margin{
+.mod-body-margin {
     margin-bottom: 20px;
 }
 
-.jumbotron{
+.jumbotron {
     margin: 60px 100px;
     background: url(../img/bg.jpg) repeat;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to bottom, #59b0ff 0, #59b0ff 100%);
+    border-color: #59b0ff;
+}
+
+.media-object {
+    width: 40px;
+    height: 40px;
+}
+
+.menu {
+    color: #999;
+    margin-top: 5px;
+}
+
+.menu .icon {
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .icon:hover {
+    color: #59b0ff;
+}
+
+.media-comment{
+    margin: 20px;
+}
+
+.media-heading a{
+    color: #1c2e81;
 }
