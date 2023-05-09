@@ -166,10 +166,30 @@ body {
     color: #59b0ff;
 }
 
-.media-comment{
+.media-comment-out{
     margin: 20px;
 }
 
 .media-heading a{
     color: #1c2e81;
+}
+
+.btn-success{
+    margin-top: 4px;
+}
+
+.aw-comment-box-height{
+    height: 90px;
+}
+
+p {
+    margin: 0 0 10px!important;
+}
+
+.aw-comment-list li {
+    padding: 10px 0 15px 0px!important;
+}
+
+.aw-comment-box .aw-comment-list {
+    padding: 0px 15px 0!important;
 }

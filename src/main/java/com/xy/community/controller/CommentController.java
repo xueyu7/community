@@ -2,7 +2,9 @@ package com.xy.community.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.xy.community.dto.CommentCreateDTO;
+import com.xy.community.dto.CommentDTO;
 import com.xy.community.dto.ResultDTO;
+import com.xy.community.enums.CommentTypeEnum;
 import com.xy.community.exception.CustomizeErrorCode;
 import com.xy.community.exception.CustomizeException;
 import com.xy.community.model.Comment;
@@ -10,12 +12,10 @@ import com.xy.community.model.User;
 import com.xy.community.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -24,7 +24,7 @@ public class CommentController {
     private CommentService commentService;
 
     @ResponseBody
-    @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    @PostMapping("/comment")
     public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
                        HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
@@ -44,4 +44,13 @@ public class CommentController {
         commentService.insert(comment);
         return ResultDTO.okOf();
     }
+
+
+    @ResponseBody
+    @GetMapping("/comment/{id}")
+    public ResultDTO comments(@PathVariable(name = "id") Integer id) {
+        List<CommentDTO> commentDTOS = commentService.listByParentId(id, CommentTypeEnum.COMMENT);
+        return ResultDTO.okOf(commentDTOS);
+    }
+
 }

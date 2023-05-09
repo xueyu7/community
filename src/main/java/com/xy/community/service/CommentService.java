@@ -58,10 +58,10 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByQuestionId(Integer id) {
+    public List<CommentDTO> listByParentId(Integer id, CommentTypeEnum typeEnum) {
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
         wrapper.eq("parent_id", id)
-                .eq("type", CommentTypeEnum.QUESTION.getType())
+                .eq("type", typeEnum.getType())
                 .orderByDesc("gmt_create");
         List<Comment> comments = commentDao.selectList(wrapper);
         if (comments.size() == 0) {
