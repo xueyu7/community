@@ -1,6 +1,7 @@
 package com.xy.community.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.xy.community.dao.QuestionDao;
 import com.xy.community.dao.UserDao;
 import com.xy.community.dto.PaginationDTO;
@@ -107,5 +108,26 @@ public class QuestionService {
 //        Question question = questionDao.selectById(id);
 //        question.setViewCount(question.getViewCount()+1);
 //        questionDao.updateById(question);
+    }
+
+    public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
+        if (StringUtils.isEmpty(queryDTO.getTag())){
+            return new ArrayList<>();
+        }
+        String[] tags = StringUtils.split(queryDTO.getTag(), ",");
+        String regexpTag = String.join("|", tags);
+        System.out.println(regexpTag);
+        Question question =new Question();
+        question.setId(queryDTO.getId());
+        question.setTag(regexpTag);
+
+        List<Question> questions = questionDao.selectRelated(question);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        for (Question q : questions) {
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO);
+            questionDTOList.add(questionDTO);
+        }
+        return questionDTOList;
     }
 }

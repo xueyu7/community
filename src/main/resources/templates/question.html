@@ -18,6 +18,7 @@
     <div class="container aw-publish">
         <div class="row">
             <div class="aw-content-wrap clearfix">
+                <!--正文-->
                 <div class="col-sm-12 col-md-9 aw-main-content">
                     <!--    问题   -->
                     <div class="aw-mod aw-question-detail aw-item">
@@ -36,7 +37,10 @@
                         <div class="mod-footer">
                             <div>
                                 <hr>
-                                标签
+                                <span class="label label-info label-margin" th:each="tag:${question.tag.split(',')}">
+                                    <span class="glyphicon glyphicon-tags"></span>
+                                    <span class="label label-info" th:text="${tag}"></span>
+                                </span>
                                 <hr>
                             </div>
                             <div class="meta">
@@ -66,25 +70,26 @@
                                     <div th:text="${comment.content}"></div>
                                     <div class="menu">
                                         <span class="glyphicon glyphicon-thumbs-up icon"></span>
-                                        <span class="glyphicon glyphicon-comment icon" data-toggle="collapse"
-                                              data-target="#collapseExample" th:text="${comment.commentCount}"
-                                              onclick="collapseComments()">
+                                        <span class="glyphicon glyphicon-comment icon"
+                                              th:data-id="${comment.id}"
+                                              th:text="${comment.commentCount}"
+                                              onclick="collapseComments(this)">
                                         </span>
                                         <span class="pull-right text-color-999"
                                               th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>
                                     </div>
                                     <!--二级评论框-->
-                                    <div class="aw-comment-box collapse" id="collapseExample">
+                                    <div class="aw-comment-box collapse" th:id="${'comment-'+comment.id}">
                                         <div class="aw-comment-list">
-                                            <ul></ul>
+                                            <ul th:id="${'ul-'+comment.id}"></ul>
                                         </div>
                                         <form class="aw-comment-box-height">
                                             <div class="aw-comment-box-main">
-                                                <input type="hidden" id="comment_id" th:value="${comment.id}">
                                                 <input type="text" class="form-control" placeholder="回复..."
-                                                       id="comment_id_content">
+                                                       th:id="${'input-'+comment.id}">
                                                 <button type="button" class="btn btn-success pull-right"
-                                                        onclick="postComment()">评论
+                                                        th:data-id="${comment.id}"
+                                                         onclick="postComment(this)">评论
                                                 </button>
                                             </div>
                                         </form>
@@ -121,30 +126,42 @@
                             </form>
                         </div>
                     </div>
-                    <!-- 侧边栏 -->
-                    <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+                    <div class="aw-mod">
+                        <div class="mod-head">
+                            <h3>发起人</h3>
+                        </div>
+                        <div class="mod-body">
+                            <div class="mod-body-margin">
+                                <a href="#">
+                                    <img class="media-object img-rounded" th:src="${question.user.avatarUrl}">
+                                </a>
+                                <div class="text-username" th:text="${question.user.name}"></div>
+                            </div>
+                        </div>
+                        <div class="mod-footer aw-mod">
+                            <h3>相关问题</h3>
+                            <div class="mod-body font-size-12 mod-body-bottom">
+                                <ul>
+                                    <li th:each="related:${relatedQuestions}">
+                                        <a th:href="@{'/question/'+${related.id}}" th:text="${related.title}"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="aw-mod">
-                            <div class="mod-head">
-                                <h3>发起人</h3>
-                            </div>
-                            <div class="mod-body">
-                                <div class="mod-body-margin">
-                                    <a href="#">
-                                        <img class="media-object img-rounded" th:src="${question.user.avatarUrl}">
-                                    </a>
-                                    <div class="text-username" th:text="${question.user.name}"></div>
-                                </div>
-                                <hr>
-                            </div>
-                            <div class="mod-footer">
-                                <h3>相关问题</h3>
-                            </div>
+                            <h3>微信答疑</h3>
+                            <img class="img-margin" src="/img/wechat.png" height="97" width="200"/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div th:insert="footer::footer"></div>
+</div>
+<div th:insert="footer::footer"></div>
+</div>
 </body>
 </html>

@@ -10,6 +10,9 @@
     <select id="listByUserId" resultType="com.xy.community.model.Question">
         select * from question where creator=#{id} limit #{offset},#{size}
     </select>
+    <select id="selectRelated" resultType="com.xy.community.model.Question">
+        select * from question where id!=#{id} and tag regexp #{tag}
+    </select>
     <update id="incView" parameterType="com.xy.community.model.Question">
         update question set view_count=view_count+1 where id=#{id}
     </update>

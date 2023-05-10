@@ -123,10 +123,10 @@ body {
     text-align: center;
 }
 
-.text-username {
-    width: 60px;
-    text-align: center;
-}
+/*.text-username {*/
+/*    width: 40px;*/
+/*    text-align: center;*/
+/*}*/
 
 .edit-font {
     font-size: 13px;
@@ -200,4 +200,16 @@ p {
 
 .color {
     color: #59b0ff;
+}
+
+.label-margin {
+    margin-right: 5px;
+}
+
+.img-margin {
+    margin-top: 5px;
+}
+
+.mod-body-bottom{
+    margin-bottom: 5px;
 }

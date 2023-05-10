@@ -11,8 +11,8 @@ function postQuestion() {
 *提交二级回复  (评论的回复)
 * */
 function postComment(e) {
-    var commentId = $("#comment_id").val();
-    var content = $("#comment_id_content").val();
+    var commentId = e.getAttribute("data-id");
+    var content = $("#input-" + commentId).val();
     commentByParentId(commentId, 2, content);
 }
 
@@ -53,39 +53,44 @@ function commentByParentId(parentId, type, content) {
 /*
 *展开二级评论
 * */
-function collapseComments() {
-    //如果class没有collapsed，color: #59b0ff;
-    var hasClassColor = $(".glyphicon-comment").hasClass("color");
-    if (!hasClassColor) {
-        $(".glyphicon-comment").addClass("color")
+function collapseComments(e) {
+    var id = e.getAttribute("data-id");
+    var comments = $("#comment-" + id);
+    comments.toggleClass("in");
+    //如果class有in，color: #59b0ff;
+    var hasClassIn = comments.hasClass("in");
+    if (!hasClassIn) {
+        e.classList.remove("color");
     }
-    if (hasClassColor) {
-        $(".glyphicon-comment").removeClass("color")
+    if (hasClassIn) {
+        e.classList.add("color");
+        var ul = $("#ul-" + id);
+        if (ul.children().length != 0) {
+        } else {
+            //在ul下添加li元素——从"/comment/{id}"地址获取后端传过来的JSON(data)
+            $.getJSON("/comment/" + id, function (data) {
+                $.each(data.data, function (index, comment) {
+                    // console.log(comment);
+                    var li = $("<li/>")
+                        .append($("<div/>", {"class": "media-left"})
+                            .append($("<img/>", {
+                                "class": "media-object img-rounded",
+                                "src": comment.user.avatarUrl
+                            }))
+                        )
+                        .append($("<div/>", {"class": "media-body"})
+                            .append($("<p/>", {"class": "clearfix"})
+                                .append($("<a/>", {"html": comment.user.name + " • "}))
+                                .append($("<span/>", {
+                                    "class": "text-color-999",
+                                    "html": moment(comment.gmtCreate).format('YYYY-MM-DD hh:mm')
+                                }))
+                            )
+                            .append($("<p/>", {"html": comment.content}))
+                        )
+                    ul.append(li);
+                });
+            });
+        }
     }
-    //在ul下添加li元素——从"/comment/{id}"地址获取后端传过来的JSON(data)
-    var id = $("#comment_id").val();
-    $.getJSON("/comment/" + id, function (data) {
-        $.each(data.data, function (index, comment) {
-            // console.log(comment);
-            var li = $("<li/>")
-                .append($("<div/>", {"class": "media-left"})
-                    .append($("<img/>", {
-                        "class": "media-object img-rounded",
-                        "src": comment.user.avatarUrl
-                    }))
-                )
-                .append($("<div/>", {"class": "media-body"})
-                    .append($("<p/>", {"class": "clearfix"})
-                        .append($("<a/>", {"html": comment.user.name + " • "}))
-                        .append($("<span/>", {
-                            "class": "text-color-999",
-                            "html": moment(comment.gmtCreate).format('YYYY-MM-DD hh:mm')
-                        }))
-                    )
-                    .append($("<p/>", {"html": comment.content}))
-                )
-            $("ul").append(li);
-        });
-    });
-
 }
