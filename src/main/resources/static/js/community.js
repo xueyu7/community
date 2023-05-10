@@ -54,23 +54,38 @@ function commentByParentId(parentId, type, content) {
 *展开二级评论
 * */
 function collapseComments() {
-    // var id = $(e).data("id");
-    // $("#comment-"+id).addClass("in");
+    //如果class没有collapsed，color: #59b0ff;
+    var hasClassColor = $(".glyphicon-comment").hasClass("color");
+    if (!hasClassColor) {
+        $(".glyphicon-comment").addClass("color")
+    }
+    if (hasClassColor) {
+        $(".glyphicon-comment").removeClass("color")
+    }
     //在ul下添加li元素——从"/comment/{id}"地址获取后端传过来的JSON(data)
     var id = $("#comment_id").val();
     $.getJSON("/comment/" + id, function (data) {
-        console.log(data);
-        // var items = [];
-        // $.each(data.data, function (key, val) {
-        //     var li
-        //     items.push("<li id='" + key + "'>" + val + "</li>");
-        // });
-        //
-        // $("<ul/>", {
-        //     "class": "my-new-list",
-        //     html: items.join("")
-        // }).appendTo("ul");
+        $.each(data.data, function (index, comment) {
+            // console.log(comment);
+            var li = $("<li/>")
+                .append($("<div/>", {"class": "media-left"})
+                    .append($("<img/>", {
+                        "class": "media-object img-rounded",
+                        "src": comment.user.avatarUrl
+                    }))
+                )
+                .append($("<div/>", {"class": "media-body"})
+                    .append($("<p/>", {"class": "clearfix"})
+                        .append($("<a/>", {"html": comment.user.name + " • "}))
+                        .append($("<span/>", {
+                            "class": "text-color-999",
+                            "html": moment(comment.gmtCreate).format('YYYY-MM-DD hh:mm')
+                        }))
+                    )
+                    .append($("<p/>", {"html": comment.content}))
+                )
+            $("ul").append(li);
+        });
     });
-
 
 }

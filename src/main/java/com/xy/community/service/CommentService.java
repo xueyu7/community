@@ -47,6 +47,7 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             commentDao.insert(comment);
+            commentDao.incComment(dbComment);
         } else {
             //回复问题
             Question question = questionDao.selectById(comment.getParentId());

@@ -10,6 +10,7 @@
     <script src="/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/common.css">
     <script src="/js/community.js"></script>
+    <script src="/js/moment.js"></script>
 </head>
 <body>
 <div th:insert="navigation :: nav"></div>
@@ -66,32 +67,16 @@
                                     <div class="menu">
                                         <span class="glyphicon glyphicon-thumbs-up icon"></span>
                                         <span class="glyphicon glyphicon-comment icon" data-toggle="collapse"
-                                              data-target="#collapseExample" onclick="collapseComments()"></span>
+                                              data-target="#collapseExample" th:text="${comment.commentCount}"
+                                              onclick="collapseComments()">
+                                        </span>
                                         <span class="pull-right text-color-999"
                                               th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>
                                     </div>
                                     <!--二级评论框-->
                                     <div class="aw-comment-box collapse" id="collapseExample">
                                         <div class="aw-comment-list">
-                                            <ul>
-                                                <li>
-                                                    <div class="media-left">
-                                                        <img class="media-object img-rounded"
-                                                             th:src="${comment.user.avatarUrl}">
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <p class="clearfix">
-                                                            <a th:text="${comment.user.name}"></a> •
-                                                            <span class="text-color-999"
-                                                                  th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
-                                                        </p>
-                                                        <p th:text="${comment.content}"></p>
-                                                    </div>
-                                                </li>
-
-
-
-                                            </ul>
+                                            <ul></ul>
                                         </div>
                                         <form class="aw-comment-box-height">
                                             <div class="aw-comment-box-main">
@@ -103,10 +88,7 @@
                                                 </button>
                                             </div>
                                         </form>
-
                                     </div>
-
-
                                 </div>
                             </div>
                             <hr>
