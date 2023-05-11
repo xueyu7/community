@@ -94,3 +94,28 @@ function collapseComments(e) {
         }
     }
 }
+
+/*
+* 展示标签
+* */
+function showSelectTag() {
+    $("#select-tag").show();
+}
+
+/*
+* 搜索标签
+* */
+function selectTag(e) {
+    var value = e.getAttribute("data-tag");
+    var previous = $("#tag").val();
+    if (previous.indexOf(value) == -1) {
+        //previous中不存在value则添加
+        if (previous){
+            //存在就拼上
+            $("#tag").val(previous+','+value);
+        } else {
+            //不存在就直接写入
+            $("#tag").val(value);
+        }
+    }
+}

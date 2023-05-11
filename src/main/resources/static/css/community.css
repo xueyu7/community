@@ -210,6 +210,19 @@ p {
     margin-top: 5px;
 }
 
-.mod-body-bottom{
+.mod-body-bottom {
     margin-bottom: 5px;
+}
+
+.tag-margin {
+    display: none;
+    margin-top: 10px;
+}
+
+.label-info {
+    margin-right: 7px;
+}
+
+.tab-pane{
+    padding: 5px;
 }

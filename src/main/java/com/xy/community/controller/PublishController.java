@@ -1,5 +1,7 @@
 package com.xy.community.controller;
 
+import cache.TagCache;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.xy.community.dao.QuestionDao;
 import com.xy.community.dao.UserDao;
 import com.xy.community.dto.QuestionDTO;
@@ -30,11 +32,13 @@ public class PublishController {
         model.addAttribute("description", question.getDescription());
         model.addAttribute("tag", question.getTag());
         model.addAttribute("id", question.getId());
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -48,6 +52,7 @@ public class PublishController {
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
+        model.addAttribute("tags", TagCache.get());
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
@@ -64,6 +69,11 @@ public class PublishController {
         }
         if (tag == null || tag == "") {
             model.addAttribute("error", "标签不能为空");
+            return "publish";
+        }
+        String invalidTag = TagCache.filterInvalid(tag);
+        if (StringUtils.isNotEmpty(invalidTag)) {
+            model.addAttribute("error", "输入非法标签：" + invalidTag);
             return "publish";
         }
 
