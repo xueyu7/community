@@ -21,63 +21,92 @@
                     <ul class="nav nav-tabs aw-nav-tabs active">
                         <h2><span th:text=" ${sectionName}"></span></h2>
                     </ul>
+                    <!--我的提问-->
                     <div class="aw-mod aw-mod-publish" th:if="${section=='questions'}">
+                        <!--问题列表-->
                         <div class="mod-body">
-
-                            <div class="media" th:each="question : ${pagination.questions}">
+                            <div class="media" th:each="question : ${pagination.data}">
                                 <div class="media-left">
                                     <a href="#">
                                         <img class="media-object img-thumbnail" th:src="${question.user.avatarUrl}">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <a th:href="@{'/question/'+${question.id}}"><h4 class="media-heading" th:text="${question.title}"></h4></a>
+                                    <a th:href="@{'/question/'+${question.id}}"><h4 class="media-heading"
+                                                                                    th:text="${question.title}"></h4>
+                                    </a>
                                     <p>
-                                        • <a href="" class="aw-user-name" th:text="${question.user.name}"></a>
                                         <span class="text-color-999">
-                                            发表了文章 • [[${question.commentCount}]] 个评论 • [[${question.viewCount}]] 次浏览 • [[${question.viewCount}]] 个点赞
+                                            • [[${question.commentCount}]] 个评论 • [[${question.viewCount}]] 次浏览 • [[${question.viewCount}]] 个点赞
                                             • <span
                                                 th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
+                                            • <a th:if="${session.user!=null && session.user.id==question.creator}"
+                                                 th:href="@{'/publish/'+${question.id}}" class="text-color-999">
+                                            <span class="glyphicon glyphicon-pencil edit-font"
+                                                  aria-hidden="true">编辑</span></a>
                                         </span>
                                     </p>
                                 </div>
                                 <hr>
                             </div>
-
                         </div>
-                        <div class="mod-footer clearfix">
+                    </div>
+                    <!--最新回复-->
+                    <div class="aw-mod aw-mod-publish" th:if="${section=='replies'}">
+                        <!--通知列表-->
+                        <div class="mod-body">
+                            <div class="media" th:each="notification : ${pagination.data}">
+                                <div class="media-body">
+                                    <a href="" th:text="${notification.notifierName}"></a>
+                                    <span th:text="${notification.typeName}"></span>
+                                    <a th:href="@{'/notification/'+${notification.id}}"
+                                       th:text="${notification.outerTitle}"></a>
+                                    <span class="label label-danger" th:if="${notification.status==0}">未读</span>
+                                    <div class="text-color-999"
+                                         th:text="${#dates.format(notification.gmtCreate,'yyyy-MM-dd HH:mm')}"></div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <!--分页-->
+                    <div class="aw-mod aw-mod-publish">
+                        <div class="mod-body">
+                            <div class="mod-footer clearfix">
 
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li th:if="${pagination.showFirstPage}">
-                                        <a th:href="@{'/profile/'+${section}(page=1)}" aria-label="FirstPage">
-                                            <span aria-hidden="true">&lt;&lt;</span>
-                                        </a>
-                                    </li>
-                                    <li th:if="${pagination.showPrevious}">
-                                        <a th:href="@{'/profile/'+${section}(page=${pagination.page}-1)}"
-                                           aria-label="Previous">
-                                            <span aria-hidden="true">&lt;</span>
-                                        </a>
-                                    </li>
-                                    <li th:each="page : ${pagination.pages}"
-                                        th:class="${pagination.page==page}? 'active' : ''">
-                                        <a th:href="@{'/profile/'+${section}(page=${page})}" th:text="${page}"></a>
-                                    </li>
-                                    <li th:if="${pagination.showNext}">
-                                        <a th:href="@{'/profile/'+${section}(page=${pagination.page}+1)}"
-                                           aria-label="Next">
-                                            <span aria-hidden="true">&gt;</span>
-                                        </a>
-                                    </li>
-                                    <li th:if="${pagination.showEndPage}">
-                                        <a th:href="@{'/profile/'+${section}(page=${pagination.totalPage})}" aria-label="EndPage">
-                                            <span aria-hidden="true">&gt;&gt;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li th:if="${pagination.showFirstPage}">
+                                            <a th:href="@{'/profile/'+${section}(page=1)}" aria-label="FirstPage">
+                                                <span aria-hidden="true">&lt;&lt;</span>
+                                            </a>
+                                        </li>
+                                        <li th:if="${pagination.showPrevious}">
+                                            <a th:href="@{'/profile/'+${section}(page=${pagination.page}-1)}"
+                                               aria-label="Previous">
+                                                <span aria-hidden="true">&lt;</span>
+                                            </a>
+                                        </li>
+                                        <li th:each="page : ${pagination.pages}"
+                                            th:class="${pagination.page==page}? 'active' : ''">
+                                            <a th:href="@{'/profile/'+${section}(page=${page})}" th:text="${page}"></a>
+                                        </li>
+                                        <li th:if="${pagination.showNext}">
+                                            <a th:href="@{'/profile/'+${section}(page=${pagination.page}+1)}"
+                                               aria-label="Next">
+                                                <span aria-hidden="true">&gt;</span>
+                                            </a>
+                                        </li>
+                                        <li th:if="${pagination.showEndPage}">
+                                            <a th:href="@{'/profile/'+${section}(page=${pagination.totalPage})}"
+                                               aria-label="EndPage">
+                                                <span aria-hidden="true">&gt;&gt;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,18 +126,16 @@
                                 <li>
                                     <a href="/profile/replies" th:class="${section=='replies'}?'active':''">
                                         <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-                                        <i></i>最新回复<span class="badge">14</span>
+                                        <i></i>最新回复<span class="badge" th:text="${session.unreadCount}"></span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div th:insert="footer::footer"></div>
+    <div th:insert="footer::footer"></div>
 </body>
 </html>

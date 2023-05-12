@@ -42,7 +42,8 @@
                                            placeholder="输入标签，以,分隔" autocomplete="off" onclick="showSelectTag()">
                                     <div class="tag-margin" id="select-tag">
                                         <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" th:each="selectCategory:${tags}">
+                                            <li role="presentation" th:each="selectCategory,selectCategoryStat:${tags}"
+                                                th:class="${selectCategoryStat.first?'active':''}">
                                                 <a th:href="${'#'+selectCategory.categoryName}" aria-controls="profile"
                                                    role="tab" class="text-color-999" data-toggle="tab"
                                                    th:text="${selectCategory.categoryName}"></a>
@@ -50,7 +51,8 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane" th:id="${selectCategory.categoryName}"
-                                                 th:each="selectCategory:${tags}">
+                                                 th:each="selectCategory,selectCategoryStat:${tags}"
+                                                 th:class="${selectCategoryStat.first?'active tab-pane':'tab-pane'}">
                                                 <span class="label label-info"
                                                       th:each="selectTag:${selectCategory.tags}">
                                                     <span class="glyphicon glyphicon-tags" th:text="${' '+selectTag}"

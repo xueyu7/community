@@ -3,6 +3,7 @@ package com.xy.community.interceptor;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xy.community.dao.UserDao;
 import com.xy.community.model.User;
+import com.xy.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -17,6 +18,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -25,11 +28,13 @@ public class SessionInterceptor implements HandlerInterceptor {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("token")) {
                     String token = cookie.getValue();
-                    QueryWrapper wrapper=new QueryWrapper();
-                    wrapper.eq("token",token);
+                    QueryWrapper wrapper = new QueryWrapper();
+                    wrapper.eq("token", token);
                     User user = userDao.selectOne(wrapper);
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
+                        Integer unreadCount = notificationService.unreadCount(user.getId());
+                        request.getSession().setAttribute("unreadCount",unreadCount);
                     }
                     break;
                 }

@@ -41,7 +41,7 @@ public class CommentController {
         comment.setContent(commentCreateDTO.getContent());
         comment.setType(commentCreateDTO.getType());
         comment.setCommentator(user.getId());
-        commentService.insert(comment);
+        commentService.insert(comment,user);
         return ResultDTO.okOf();
     }
 
