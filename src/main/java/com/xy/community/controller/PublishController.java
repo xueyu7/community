@@ -1,9 +1,7 @@
 package com.xy.community.controller;
 
-import cache.TagCache;
+import com.xy.community.cache.TagCache;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.xy.community.dao.QuestionDao;
-import com.xy.community.dao.UserDao;
 import com.xy.community.dto.QuestionDTO;
 import com.xy.community.model.Question;
 import com.xy.community.model.User;

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/editormd.min.css" />
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/editormd.min.js"></script>
+</head>
+<body>
+
+<div id="test-editor">
+    <textarea style="display:none;"></textarea>
+</div>
+<script type="text/javascript">
+    $(function() {
+        var editor = editormd("test-editor", {
+            width  : "100%",
+            height : "100%",
+            path   : "/js/lib/"
+        });
+    });
+</script>
+</body>
+</html>

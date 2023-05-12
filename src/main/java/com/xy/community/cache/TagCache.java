@@ -1,4 +1,4 @@
-package cache;
+package com.xy.community.cache;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.xy.community.dto.TagDTO;

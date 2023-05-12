@@ -9,8 +9,12 @@
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/editormd.preview.min.css">
     <script src="/js/community.js"></script>
     <script src="/js/moment.js"></script>
+    <script src="/js/editormd.min.js"></script>
+    <script src="/js/lib/marked.min.js"></script>
+    <script src="/js/lib/prettify.min.js"></script>
 </head>
 <body>
 <div th:insert="navigation :: nav"></div>
@@ -31,9 +35,14 @@
                             </span>
                             <hr>
                         </div>
-                        <div class="mod-body">
-                            <div th:text="${question.description}"></div>
+                        <div class="mod-body" id="question-view">
+                            <textarea style="display: none" th:text="${question.description}"></textarea>
                         </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                editormd.markdownToHTML("question-view", {});
+                            });
+                        </script>
                         <div class="mod-footer">
                             <div>
                                 <hr>
@@ -89,7 +98,7 @@
                                                        th:id="${'input-'+comment.id}">
                                                 <button type="button" class="btn btn-success pull-right"
                                                         th:data-id="${comment.id}"
-                                                         onclick="postComment(this)">评论
+                                                        onclick="postComment(this)">评论
                                                 </button>
                                             </div>
                                         </form>
