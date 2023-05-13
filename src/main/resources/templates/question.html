@@ -112,9 +112,9 @@
                             <form action="#">
                                 <div class="mod-head">
                                     <a href="#" class="aw-user-name">
-                                        <img th:src="${question.user.avatarUrl}">
+                                        <img th:src="${session.user!=null?session.user.avatarUrl:'/img/avatar-default.png'}">
                                     </a>
-                                    <p th:text="${question.user.name}"></p>
+                                    <p th:text="${session.user!=null?session.user.name:'匿名用户'}"></p>
                                 </div>
                                 <div class="mod-body">
                                     <div class="aw-mod aw-editor-box">
@@ -145,9 +145,11 @@
                         <div class="mod-body">
                             <div class="mod-body-margin">
                                 <a href="#">
-                                    <img class="media-object img-rounded" th:src="${question.user.avatarUrl}">
+                                    <img class="media-object img-rounded"
+                                         th:src="${session.user!=null?session.user.avatarUrl:'/img/avatar-default.png'}">
                                 </a>
-                                <div class="text-username" th:text="${question.user.name}"></div>
+                                <div class="text-username"
+                                     th:text="${session.user!=null?session.user.name:'匿名用户'}"></div>
                             </div>
                         </div>
                         <div class="mod-footer aw-mod">
