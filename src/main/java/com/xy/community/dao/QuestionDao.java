@@ -18,4 +18,5 @@ public interface QuestionDao extends BaseMapper<Question> {
     int incComment(Question question);
 
     List<Question> selectRelated(Question question);
+
 }

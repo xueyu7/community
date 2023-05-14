@@ -25,30 +25,30 @@ public class QuestionService {
     @Autowired
     private QuestionDao questionDao;
 
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search, Integer page, Integer size) {
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        if (StringUtils.isNotEmpty(search)) {
+            wrapper.like("title", search);
+        }
+        PaginationDTO paginationDTO = getPaginationDTO(page, size, wrapper);
+        return paginationDTO;
+    }
+
+    private PaginationDTO getPaginationDTO(Integer page, Integer size, QueryWrapper<Question> wrapper) {
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer count = questionDao.selectCount(null);
+        Integer count = questionDao.selectCount(wrapper);
         Integer offset = paginationProcess(paginationDTO, count, page, size);
-        QueryWrapper<Question> wrapper=new QueryWrapper<>();
-        wrapper.last("limit "+offset+","+size)
+        wrapper.last("limit " + offset + "," + size)
                 .orderByDesc("gmt_create");
         List<Question> questions = questionDao.selectList(wrapper);
-//        List<Question> questions = questionDao.list(offset, size);
         copyToQuestionDTO(paginationDTO, questions);
         return paginationDTO;
     }
 
     public PaginationDTO list(Integer page, Integer size, Integer id) {
-        PaginationDTO paginationDTO = new PaginationDTO();
         QueryWrapper<Question> wrapper = new QueryWrapper<>();
         wrapper.eq("creator", id);
-        Integer count = questionDao.selectCount(wrapper);
-        Integer offset = paginationProcess(paginationDTO, count, page, size);
-        wrapper.last("limit "+offset+","+size)
-                .orderByDesc("gmt_create");
-        List<Question> questions = questionDao.selectList(wrapper);
-//        List<Question> questions = questionDao.listByUserId(id, offset, size);
-        copyToQuestionDTO(paginationDTO, questions);
+        PaginationDTO paginationDTO = getPaginationDTO(page, size, wrapper);
         return paginationDTO;
     }
 
@@ -111,13 +111,13 @@ public class QuestionService {
     }
 
     public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
-        if (StringUtils.isEmpty(queryDTO.getTag())){
+        if (StringUtils.isEmpty(queryDTO.getTag())) {
             return new ArrayList<>();
         }
         String[] tags = StringUtils.split(queryDTO.getTag(), ",");
         String regexpTag = String.join("|", tags);
         System.out.println(regexpTag);
-        Question question =new Question();
+        Question question = new Question();
         question.setId(queryDTO.getId());
         question.setTag(regexpTag);
 
