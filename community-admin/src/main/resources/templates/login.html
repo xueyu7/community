@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登录-进步社区</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<div id="wrapper">
+    <div class="aw-login-box">
+        <div class="mod-body clearfix">
+            <div class="content pull-left">
+                <h1 class="title-size">管理员登录</h1>
+                <h2>Progress 进步社区</h2>
+                <form method="post" action="/login">
+                    <ul>
+                        <li>
+                            <input type="text" class="form-control" placeholder="用户名" name="username"/>
+                        </li>
+                        <li>
+                            <input type="password" class="form-control" placeholder="密码" name="password"/>
+                        </li>
+                        <li class="last">
+                            <button type="submit" class="pull-right btn btn-large btn-primary">登录</button>
+                        </li>
+                    </ul>
+                    <div class="admin-error" th:if="${error!=null}" th:text="${error}"></div>
+                </form>
+            </div>
+            <div class="side-bar pull-left">
+
+                <!--                <h3>第三方账号登录</h3>-->
+                <!--                <a href="" class="btn btn-block btn-github">Github 登录</a>-->
+                <!--                <a href="" class="btn btn-block btn-gitee">Gitee 登录</a>-->
+
+            </div>
+        </div>
+        <div class="mod-footer">
+            <!--            <span>还没有账号?</span>&nbsp;&nbsp;-->
+            <!--            <a href="/register">立即注册</a>&nbsp;&nbsp;•&nbsp;&nbsp;-->
+            <!--            <a href="/">游客访问</a>-->
+        </div>
+    </div>
+</div>
+<!--页尾-->
+<div class="aw-footer-wrap">
+    <div class="aw-footer">
+        <p class="mt-5 mb-3 text-muted">Copyright © 2023 · <span>xueyu</span></p>
+        <!--            <a class="btn btn-sm">中文</a>-->
+        <!--            <a class="btn btn-sm">English</a>-->
+        <p>网站程序：
+            <a href="https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-embedded-database-support">
+                spring boot</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>

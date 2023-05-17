@@ -1,0 +1,252 @@
+body {
+    background: url(../images/bg.jpg) repeat;
+}
+
+/*.main {*/
+/*    margin: 30px;*/
+/*    background: white;*/
+/*}*/
+
+.container-margin {
+    margin: 0 30px;
+}
+
+.btn-publish {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.navbar-color {
+    background: #499ef3;
+}
+
+.navbar-font-color {
+    color: white !important;
+}
+
+.aw-user-nav {
+    margin: 10px 0 0 7px !important;
+}
+
+.btn-primary {
+    color: #fff;
+
+}
+
+.btn-primary-color {
+    border: none !important;
+    background: #59b0ff;
+}
+
+.btn-primary:focus, .btn-primary:hover {
+    background-color: #56acf9;
+    background-position: 0 -15px;
+}
+
+.aw-user-nav .login {
+    margin-right: 10px;
+}
+
+.btn-color {
+    background: #fff;
+    color: #8b8b8b;
+}
+
+.btn-default:hover, .btn-default:focus {
+    background-color: #f8f8f8;
+    background-position: 0 -15px;
+    color: #8b8b8b;
+}
+
+.aw-content-wrap {
+    margin: 0 15px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+}
+
+.aw-main-content {
+    padding: 0 0 20px;
+    border-right: 1px solid #e6e6e6;
+}
+
+.aw-side-bar {
+    margin-left: -1px;
+    padding-top: 20px;
+    border-left: 1px solid #e6e6e6;
+}
+
+.alert-left {
+    float: left;
+    width: calc(100% - 130px);
+}
+
+.alert-right {
+    float: right;
+    width: 130px;
+}
+
+.alert-center {
+    text-align: center;
+}
+
+.mod-body {
+    margin-top: 20px;
+}
+
+.media-object {
+    width: 60px;
+    height: 60px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #f4f4f4;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a {
+    background-image: linear-gradient(to bottom, #59b0ff 0, #59b0ff 100%);
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    color: #fefefe;
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+    color: #d3d5d7;
+}
+
+.dropdown-menu > li > a {
+    padding: 3px 10px;
+    font-weight: 500;
+    line-height: 2.5;
+    color: #333;
+    text-align: center;
+}
+
+/*.text-username {*/
+/*    width: 40px;*/
+/*    text-align: center;*/
+/*}*/
+
+.edit-font {
+    font-size: 13px;
+}
+
+.mod-body-margin {
+    margin-bottom: 20px;
+}
+
+.jumbotron {
+    margin: 60px 100px;
+    background: url(../images/bg.jpg) repeat;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to bottom, #59b0ff 0, #59b0ff 100%);
+    border-color: #59b0ff;
+}
+
+.media-object {
+    width: 40px;
+    height: 40px;
+}
+
+.menu {
+    color: #999;
+    margin-top: 5px;
+}
+
+.menu .icon {
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .icon:hover {
+    color: #59b0ff;
+}
+
+.media-comment-out {
+    margin: 20px;
+}
+
+.media-heading a {
+    color: #1c2e81;
+}
+
+.btn-success {
+    margin-top: 4px;
+}
+
+.aw-comment-box-height {
+    height: 90px;
+}
+
+p {
+    margin: 0 0 10px !important;
+}
+
+.aw-comment-list li {
+    padding: 10px 0 15px 0px !important;
+}
+
+.aw-comment-box .aw-comment-list {
+    padding: 0px 15px 0 !important;
+}
+
+.icon {
+    font-size: 12px;
+}
+
+.color {
+    color: #59b0ff;
+}
+
+.label-margin {
+    margin-right: 5px;
+}
+
+.img-margin {
+    margin-top: 5px;
+}
+
+.mod-body-bottom {
+    margin-bottom: 5px;
+}
+
+.tag-margin {
+    display: none;
+    margin-top: 10px;
+}
+
+.tab-pane {
+    padding: 5px;
+}
+
+.label {
+    white-space: normal;
+    display: inline-block;
+    margin: 5px 5px 0 7px;
+}
+
+.label-info {
+    background-color: #5cadff;
+}
+
+.pagination {
+    float: right;
+}
+
+.glyphicon-fire {
+    color: #ff0000;
+    margin-left: 7px;
+}
+
+.title-size {
+    font-size: 180%;
+}
+
+.admin-error {
+    color: red;
+}
+

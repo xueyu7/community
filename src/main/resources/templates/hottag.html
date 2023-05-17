@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${tag}"></title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<div th:insert="navigation :: nav"></div>
+<div class="aw-container-wrap">
+    <div class="container aw-publish">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content">
+                    <div class="aw-mod aw-topic-detail-title">
+                        <div class="mod-body">
+                            <img src="/images/tag-img.png" height="50" width="50"/>
+                            <h2 class="pull-left" th:text="${tag}"></h2>
+                        </div>
+                    </div>
+                    <div class="all">
+                        <!--搜索功能，暂未实现-->
+                        <div class="hottag-search">
+                            <form th:action="@{'/hottag/'+${tag}}" method="get">
+                                <div class="hottag-content"><a href="/hottag/test">全部内容</a></div>
+                                <button type="submit" class="btn btn-default btn-color btn-search">搜索</button>
+                                <div class="aw-search-bar pull-right hidden-xs">
+                                    <i class="icon icon-search"></i>
+                                    <input type="text" id="question-input" class="search-query form-control"
+                                           name="hot_search" placeholder="输入...">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="aw-mod aw-mod-publish">
+
+                        <!--问题列表-->
+                        <div class="mod-body">
+
+                            <div class="media" th:each="question : ${pagination.data}">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object img-rounded" th:src="${question.user.avatarUrl}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
+                                    </h4>
+                                    <p>
+                                        • <a href="" class="aw-user-name" th:text="${question.user.name}"></a>
+                                        <span class="text-color-999">发表了文章 • [[${question.commentCount}]] 个评论 • [[${question.viewCount}]] 次浏览
+                                            • <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
+                                    </p>
+                                </div>
+                                <hr>
+                            </div>
+
+                        </div>
+                        <!--分页-->
+                        <div class="mod-footer clearfix">
+
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li th:if="${pagination.showFirstPage}">
+                                        <a th:href="@{'/hottag/'+${tag}(page=1,hot_search=${hot_search})}"
+                                           aria-label="FirstPage">
+                                            <span aria-hidden="true">&lt;&lt;</span>
+                                        </a>
+                                    </li>
+                                    <li th:if="${pagination.showPrevious}">
+                                        <a th:href="@{'/hottag/'+${tag}(page=${pagination.page}-1,hot_search=${hot_search})}"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&lt;</span>
+                                        </a>
+                                    </li>
+                                    <li th:each="page : ${pagination.pages}"
+                                        th:class="${pagination.page==page}? 'active' : ''">
+                                        <a th:href="@{'/hottag/'+${tag}(page=${page},hot_search=${hot_search})}"
+                                           th:text="${page}"></a>
+                                    </li>
+                                    <li th:if="${pagination.showNext}">
+                                        <a th:href="@{'/hottag/'+${tag}(page=${pagination.page}+1,hot_search=${hot_search})}"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&gt;</span>
+                                        </a>
+                                    </li>
+                                    <li th:if="${pagination.showEndPage}">
+                                        <a th:href="@{'/hottag/'+${tag}(page=${pagination.totalPage},hot_search=${hot_search})}"
+                                           aria-label="EndPage">
+                                            <span aria-hidden="true">&gt;&gt;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+                    <div class="aw-mod publish-help">
+                        <div class="mod-head">
+                            <h3>热门问答</h3>
+                            <div class="mod-body font-size-12 mod-body-bottom">
+                                <ul>
+                                    <li th:each="question:${hotQuestions}">
+                                        <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
+                                        <span class="glyphicon glyphicon-fire"></span>
+                                        <span class="text-color-999">[[${question.viewCount}]] 次浏览</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="aw-mod">
+                            <h3>微信答疑</h3>
+                            <img class="img-margin" src="/images/wechat.png" height="97" width="200"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="footer::footer"></div>
+</body>
+</html>

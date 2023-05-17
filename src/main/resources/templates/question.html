@@ -112,7 +112,7 @@
                             <form action="#">
                                 <div class="mod-head">
                                     <a href="#" class="aw-user-name">
-                                        <img th:src="${session.user!=null?session.user.avatarUrl:'/img/avatar-default.png'}">
+                                        <img th:src="${session.user!=null?session.user.avatarUrl:'/images/avatar-default.png'}">
                                     </a>
                                     <p th:text="${session.user!=null?session.user.name:'匿名用户'}"></p>
                                 </div>
@@ -146,7 +146,7 @@
                             <div class="mod-body-margin">
                                 <a href="#">
                                     <img class="media-object img-rounded"
-                                         th:src="${session.user!=null?session.user.avatarUrl:'/img/avatar-default.png'}">
+                                         th:src="${session.user!=null?session.user.avatarUrl:'/images/avatar-default.png'}">
                                 </a>
                                 <div class="text-username"
                                      th:text="${session.user!=null?session.user.name:'匿名用户'}"></div>
@@ -164,7 +164,7 @@
                         </div>
                         <div class="aw-mod">
                             <h3>微信答疑</h3>
-                            <img class="img-margin" src="/img/wechat.png" height="97" width="200"/>
+                            <img class="img-margin" src="/images/wechat.png" height="97" width="200"/>
                         </div>
                     </div>
                 </div>

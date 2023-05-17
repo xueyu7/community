@@ -15,6 +15,7 @@ public class UserService {
     public void createOrUpdate(User user) {
         QueryWrapper wrapper=new QueryWrapper();
         wrapper.eq("account_id",user.getAccountId());
+        wrapper.eq("type",user.getType());
         User dbUser = userDao.selectOne(wrapper);
         if (dbUser==null){
             userDao.insert(user);

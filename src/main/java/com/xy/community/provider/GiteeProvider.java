@@ -1,8 +1,8 @@
 package com.xy.community.provider;
 
 import com.alibaba.fastjson2.JSON;
-import com.xy.community.dto.AccessTokenDTO;
-import com.xy.community.dto.GiteeUser;
+import com.xy.community.dto.GiteeAccessTokenDTO;
+import com.xy.community.provider.dto.GiteeUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
 @Component
 public class GiteeProvider {
 
-    public String getAccessToken(AccessTokenDTO accessTokenDTO) {
+    public String getAccessToken(GiteeAccessTokenDTO accessTokenDTO) {
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
 

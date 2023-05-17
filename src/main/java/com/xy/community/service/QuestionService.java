@@ -33,6 +33,21 @@ public class QuestionService {
         PaginationDTO paginationDTO = getPaginationDTO(page, size, wrapper);
         return paginationDTO;
     }
+    public PaginationDTO listByHot(Integer page, Integer size) {
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("view_count");
+        PaginationDTO paginationDTO = getPaginationDTO(page, size, wrapper);
+        return paginationDTO;
+    }
+    public PaginationDTO list(String search, Integer page, Integer size, String tag) {
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        if (StringUtils.isNotEmpty(search)) {
+            wrapper.like("title", search);
+        }
+        wrapper.like("tag",tag);
+        PaginationDTO paginationDTO = getPaginationDTO(page, size, wrapper);
+        return paginationDTO;
+    }
 
     private PaginationDTO getPaginationDTO(Integer page, Integer size, QueryWrapper<Question> wrapper) {
         PaginationDTO paginationDTO = new PaginationDTO();
@@ -129,5 +144,12 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         }
         return questionDTOList;
+    }
+
+    public List<Question> selectHot(String tag) {
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        wrapper.like("tag",tag).orderByDesc("view_count").ge("view_count",50);
+        List<Question> questions = questionDao.selectList(wrapper);
+        return questions;
     }
 }
