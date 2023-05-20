@@ -37,7 +37,7 @@
                                     </a>
                                     <p>
                                         <span class="text-color-999">
-                                            • [[${question.commentCount}]] 个评论 • [[${question.viewCount}]] 次浏览 • [[${question.viewCount}]] 个点赞
+                                            • [[${question.commentCount}]] 个评论 • [[${question.viewCount}]] 次浏览
                                             • <span
                                                 th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
                                             • <a th:if="${session.user!=null && session.user.id==question.creator}"

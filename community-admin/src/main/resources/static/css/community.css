@@ -250,3 +250,6 @@ p {
     color: red;
 }
 
+.layui-layout-admin .header {
+    border-bottom: 5px solid #99cfff!important;
+}

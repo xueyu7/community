@@ -28,9 +28,10 @@ public class AuthorizeController {
     public String callback(@PathVariable(name = "type") String type,
                            @RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletResponse response) {
-        UserStrategy userStrategy=userStrategyFactory.getStrategy(type);
-        LoginUserInfo loginUserInfo=userStrategy.getUser(code, state);
+                           HttpServletResponse response,
+                           HttpServletRequest request) {
+        UserStrategy userStrategy = userStrategyFactory.getStrategy(type);
+        LoginUserInfo loginUserInfo = userStrategy.getUser(code, state);
         if (loginUserInfo != null) {
             User user = new User();
             String token = UUID.randomUUID().toString();
@@ -39,11 +40,12 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(loginUserInfo.getId()));
             user.setAvatarUrl(loginUserInfo.getAvatar_url());
             user.setType(type);
-            userService.createOrUpdate(user);
-            Cookie cookie = new Cookie("token", token);
-//            先暂存1小时，后续改
-            cookie.setMaxAge(60*60);
-            response.addCookie(cookie);
+            if (user.getAccountId() != "null") {
+                userService.createOrUpdate(user);
+                Cookie cookie = new Cookie("token", token);
+                cookie.setMaxAge(60 * 60);
+                response.addCookie(cookie);
+            }
             return "redirect:/";
         } else {
             //登录失败，重新登录

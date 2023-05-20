@@ -18,7 +18,6 @@ public class CommentDTO {
     private Integer commentator;
     private String content;
     private Integer commentCount;
-    private Integer likeCount;
     private User user;
 
     @TableField(fill = FieldFill.INSERT)

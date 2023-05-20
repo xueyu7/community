@@ -18,7 +18,6 @@ public class Question {
     private Integer creator;
     private Integer viewCount;
     private Integer commentCount;
-    private Integer likeCount;
 
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;

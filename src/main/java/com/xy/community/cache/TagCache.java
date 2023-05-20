@@ -21,6 +21,11 @@ public class TagCache {
         framework.setTags(Arrays.asList("spring","spring mvc","spring boot","mybatis","mybatis-plus","struts","hibernate","ibatis","laravel","express","django","flask","koa","jquery","vue","bootstrap","easyui","angular","react","layui","semanticui","elementui"));
         tagDTOS.add(framework);
 
+        TagDTO templateEngine = new TagDTO();
+        templateEngine.setCategoryName("模板引擎");
+        templateEngine.setTags(Arrays.asList("thymeleaf","jsp","freeMarker","groovy","mustache"));
+        tagDTOS.add(templateEngine);
+
         TagDTO server = new TagDTO();
         server.setCategoryName("服务器");
         server.setTags(Arrays.asList("linux","nginx","docker","apache","ubuntu","centos","缓存 tomcat","unix","hadoop","windows-server","负载均衡"));
@@ -38,7 +43,7 @@ public class TagCache {
 
         TagDTO other =new TagDTO();
         other.setCategoryName("其他");
-        other.setTags(Arrays.asList("其他","test","avatar_url","lombok","jrebel","yaml","login","快捷键"));
+        other.setTags(Arrays.asList("其他","bug","test","avatar_url","lombok","jrebel","yaml","login","快捷键"));
         tagDTOS.add(other);
         return tagDTOS;
     }

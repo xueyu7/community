@@ -17,7 +17,6 @@ public class Comment {
     private Integer commentator;
     private String content;
     private Integer commentCount;
-    private Integer likeCount;
 
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;

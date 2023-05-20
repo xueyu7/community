@@ -39,7 +39,7 @@ function commentByParentId(parentId, type, content) {
                     if (isAccepted) {
                         // window.open("https://gitee.com/oauth/authorize?client_id=2026808b153886ae6c2c1a6bbabbf2de7f75e03588fcc6ce707e46c2c1e7d3be&redirect_uri=http://localhost:8887/callback&response_type=code&state=1");
                         $('#myModal').modal({})
-                        window.localStorage.setItem("closable", true);
+                        // window.localStorage.setItem("closable", true);
                     }
                 } else {
                     alert(response.message);

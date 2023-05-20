@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentDao extends BaseMapper<Comment> {
+
     int incComment(Comment comment);
+
 }
