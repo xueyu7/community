@@ -1,4 +1,4 @@
-package com.xy.community.config;
+package com.xy.community_admin.config;
 
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
@@ -7,7 +7,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@MapperScan("com.xy.community.dao")
+@MapperScan("com.xy.community_admin.dao")
 @Configuration
 public class MybatisPlusConfig {
     //分页插件，未使用

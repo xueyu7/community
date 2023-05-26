@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xy.community_admin.dao.QuestionDao">
+    <select id="selectDel" resultType="com.xy.community_admin.model.Question">
+        select * from question where deleted=1
+    </select>
+    <update id="recover" parameterType="com.xy.community_admin.model.Question">
+        update question set deleted=0 where id=#{id}
+    </update>
+    <delete id="deleteAlways" parameterType="com.xy.community_admin.model.Question">
+        delete from question where id=#{id}
+    </delete>
+    <delete id="deleteAll" parameterType="com.xy.community_admin.model.Question">
+        delete from question where deleted=1
+    </delete>
+</mapper>
+

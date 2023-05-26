@@ -1,9 +1,6 @@
 package com.xy.community_admin.model;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -23,4 +20,7 @@ public class Question {
     private Date gmtCreate;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+    //逻辑删除
+    @TableLogic
+    private Integer deleted;
 }
