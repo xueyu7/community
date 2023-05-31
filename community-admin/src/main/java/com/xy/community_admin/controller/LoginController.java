@@ -44,6 +44,7 @@ public class LoginController {
 //                cookie.setMaxAge(60);
 //                response.addCookie(cookie);
                 request.getSession().setAttribute("username",username);
+//                request.getSession().setAttribute("id",admin.getId());
                 return "redirect:/";
             }
         }else {

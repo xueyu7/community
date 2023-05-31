@@ -32,9 +32,10 @@
                                                 style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">admin</a>
-                    <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                        <!--                        <dd><a href="">个人信息</a></dd>-->
-                        <!--                        <dd><a href="">切换帐号</a></dd>-->
+                    <dl class="layui-nav-child">
+                        <!-- 二级菜单 -->
+                        <!--<dd><a href="">个人信息</a></dd>
+                        <dd><a href="">切换帐号</a></dd>-->
                         <dd><a href="/logout">退出</a></dd>
                     </dl>
                 </li>
@@ -44,7 +45,7 @@
                   </a>
                   </li> -->
                 <!--待解决：跨域访问-->
-                <!--                <li class="layui-nav-item x-index"><a href="https://localhost:8887">前台首页</a></li>-->
+                <!--<li class="layui-nav-item x-index"><a href="https://localhost:8887">前台首页</a></li>-->
             </ul>
         </div>
     </div>
@@ -98,19 +99,29 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd class="">
-                            <a href="javascript:;" _href="./comment-list.html">
+                            <a href="javascript:;" _href="./comment-list">
                                 <cite>评论列表</cite>
-                            </a>
-                        </dd>
-                        <dd class="">
-                            <a href="javascript:;" _href="./feedback-list.html">
-                                <cite>意见反馈</cite>
                             </a>
                         </dd>
                     </dl>
                 </li>
-                <!--管理员-->
+                <!--通知-->
                 <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:;">
+                        <i class="layui-icon" style="top: 3px;">&#xe62d;</i><cite>通知管理</cite>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd class="">
+                            <a href="javascript:;" _href="./notification-list">
+                                <cite>通知列表</cite>
+                            </a>
+                        </dd>
+                    </dl>
+                </li>
+
+
+                <!--管理员-->
+                <!--<li class="layui-nav-item">
                     <a class="javascript:;" href="javascript:;">
                         <i class="layui-icon" style="top: 3px;">&#xe613;</i><cite>管理员管理</cite>
                     </a>
@@ -136,7 +147,7 @@
                             </a>
                         </dd>
                     </dl>
-                </li>
+                </li>-->
 
 
                 <!--     <li class="layui-nav-item">

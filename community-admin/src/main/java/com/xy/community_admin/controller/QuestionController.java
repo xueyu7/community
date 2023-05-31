@@ -29,11 +29,6 @@ public class QuestionController {
         return "/question-list";
     }
 
-    @GetMapping("/question-add")
-    public String add(Model model) {
-        return "/question-add";
-    }
-
     @ResponseBody
     @PostMapping("/deleteQuestion")
     private void delete(@RequestBody DelDTO delDTO) {
@@ -51,19 +46,19 @@ public class QuestionController {
 
     @ResponseBody
     @PostMapping("/deleteQuestionAlways")
-    private void deleteAlways(@RequestBody DelDTO delDTO) {
+    public void deleteAlways(@RequestBody DelDTO delDTO) {
         questionService.deleteAlways(delDTO.getId());
     }
 
     @ResponseBody
     @PostMapping("/recover")
-    private void recover(@RequestBody DelDTO delDTO) {
+    public void recover(@RequestBody DelDTO delDTO) {
         questionService.recover(delDTO.getId());
     }
 
     @ResponseBody
     @PostMapping("/deleteAll")
-    private void deleteAll() {
+    public void deleteAll() {
         questionService.deleteAll();
     }
 
