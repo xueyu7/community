@@ -50,10 +50,12 @@
         </div>
     </form>
     <xblock>
-        <button class="layui-btn" onclick="question_add('添加问题','question-add.html','600','500')">
-            <i class="layui-icon">&#xe608;</i>添加
-        </button>
-        <span class="x-right" style="line-height:40px" th:text="${'共有数据'+count+'条'}">共有数据：8 条</span>
+        <!--        <button class="layui-btn" onclick="question_add('添加问题','question-add','600','500')">-->
+        <!--            <i class="layui-icon">&#xe608;</i>添加-->
+        <!--        </button>-->
+        <div style="height: 38px;">
+            <span class="x-right" style="line-height:40px" th:text="${'共有数据'+count+'条'}"></span>
+        </div>
     </xblock>
     <table class="layui-table">
         <thead>
@@ -66,6 +68,7 @@
             <th> 评论次数</th>
             <th> 创建时间</th>
             <th> 修改时间</th>
+            <th> 状态</th>
             <th> 操作</th>
         </tr>
         </thead>
@@ -79,11 +82,17 @@
             <td th:text="${question.commentCount}"></td>
             <td th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></td>
             <td th:text="${#dates.format(question.gmtModified,'yyyy-MM-dd HH:mm')}"></td>
+            <td class="td-status">
+                <span class="layui-btn layui-btn-disabled layui-btn-mini">普通</span>
+            </td>
             <td class="td-manage">
-                <a title="编辑" href="javascript:;" onclick="question_edit('编辑','question-edit.html','4','','510')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe642;</i>
+                <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="置顶"
+                   th:data-id="${question.id}"><i class="layui-icon">&#xe62f;</i>
                 </a>
+                <!--<a title="展示" href="javascript:;" onclick="question_edit('展示','question-show','4','','510')"
+                   class="ml-5" style="text-decoration:none"><span style="font-size: 12px;">[展示]</span>
+                    &lt;!&ndash;<i class="layui-icon">&#xe642;</i>&ndash;&gt;
+                </a>-->
                 <a title="删除" href="javascript:;" onclick="question_del(this)"
                    th:data-id="${question.id}" style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -93,7 +102,7 @@
         </tbody>
     </table>
 
-<!--    <div id="page"></div>-->
+    <!--    <div id="page"></div>-->
 </div>
 <script src="./lib/layui/layui.js" charset="utf-8"></script>
 <script src="./js/x-layui.js" charset="utf-8"></script>
@@ -117,9 +126,14 @@
         });
     });
 
-    function question_show(argument) {
-        layer.msg('可以跳到前台具体问题页面', {icon: 1, time: 1000});
-    }
+    // function question_show(argument) {
+    //     layer.msg('可以跳到前台具体问题页面', {icon: 1, time: 1000});
+    // }
+    //
+    // /*添加*/
+    // function question_add(title, url, w, h) {
+    //     x_admin_show(title, url, w, h);
+    // }
 
     //选中下拉框
     $().ready(function () {
@@ -132,11 +146,6 @@
             })
         }
     })
-
-    /*添加*/
-    function question_add(title, url, w, h) {
-        x_admin_show(title, url, w, h);
-    }
 
     //编辑
     function question_edit(title, url, id, w, h) {
@@ -162,6 +171,30 @@
             });
             $(obj).parents("tr").remove();
             layer.msg('已删除!', {icon: 1, time: 1000});
+        });
+    }
+
+    /*问题-取消置顶*/
+    function member_stop(obj) {
+        layer.confirm('确认要取消置顶吗？', function (index) {
+            //发异步把用户状态进行更改
+
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this)" href="javascript:;" title="置顶"><i class="layui-icon">&#xe62f;</i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">普通</span>');
+            $(obj).remove();
+            layer.msg('已取消置顶!', {icon: 5, time: 1000});
+        });
+    }
+
+    /*问题-置顶*/
+    function member_start(obj) {
+        layer.confirm('确认要置顶吗？', function (index) {
+            //发异步把用户状态进行更改
+            
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this)" href="javascript:;" title="取消置顶"><i class="layui-icon">&#xe601;</i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">置顶</span>');
+            $(obj).remove();
+            layer.msg('已置顶!', {icon: 6, time: 1000});
         });
     }
 </script>

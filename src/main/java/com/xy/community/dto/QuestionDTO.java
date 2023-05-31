@@ -19,6 +19,7 @@ public class QuestionDTO {
     private Integer creator;
     private Integer viewCount;
     private Integer commentCount;
+    private Integer sticky;
     private User user;
 
     @TableField(fill = FieldFill.INSERT)

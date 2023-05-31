@@ -24,27 +24,29 @@ public class IndexController {
 
     @GetMapping("/")
     public String hello(@RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "5") Integer size,
+                        @RequestParam(name = "size", defaultValue = "7") Integer size,
                         @RequestParam(name = "search", required = false) String search,
+                        @RequestParam(name = "sort", required = false) String sort,
                         Model model) {
-        PaginationDTO pagination = questionService.list(search, page, size);
+        PaginationDTO pagination = questionService.list(search, sort, page, size);
         model.addAttribute("pagination", pagination);
         model.addAttribute("search", search);
-        model.addAttribute("hots",hotTagCache.getHots());
-        model.addAttribute("section","index");
+        model.addAttribute("hots", hotTagCache.getHots());
+//        model.addAttribute("section", "index");
+        model.addAttribute("sort", sort);
         return "index";
     }
 
-    @GetMapping("/{action}")
-    public String profile(@PathVariable(name = "action") String action,
-                          @RequestParam(name = "page", defaultValue = "1") Integer page,
-                          @RequestParam(name = "size", defaultValue = "5") Integer size,
-                          Model model) {
-        if (action.equals("hottest")) {
-            model.addAttribute("section", "hottest");
-            PaginationDTO paginationDTO = questionService.listByHot(page, size);
-            model.addAttribute("pagination", paginationDTO);
-        }
-        return "index";
-    }
+//    @GetMapping("/{action}")
+//    public String profile(@PathVariable(name = "action") String action,
+//                          @RequestParam(name = "page", defaultValue = "1") Integer page,
+//                          @RequestParam(name = "size", defaultValue = "5") Integer size,
+//                          Model model) {
+//        if (action.equals("hottest")) {
+//            model.addAttribute("section", "hottest");
+//            PaginationDTO paginationDTO = questionService.listByHot(page, size);
+//            model.addAttribute("pagination", paginationDTO);
+//        }
+//        return "index";
+//    }
 }

@@ -47,7 +47,6 @@
                                         </span>
                                     </p>
                                 </div>
-                                <hr>
                             </div>
                         </div>
                     </div>
@@ -59,13 +58,15 @@
                                 <div class="media-body">
                                     <a href="" th:text="${notification.notifierName}"></a>
                                     <span th:text="${notification.typeName}"></span>
-                                    <a th:href="@{'/notification/'+${notification.id}}"
+                                    <a th:if="${notification.type!=3}" th:href="@{'/notification/'+${notification.id}}"
+                                       th:text="${notification.outerTitle}"></a>
+                                    <!--待完成 系统通知页面跳转-->
+                                    <a th:if="${notification.type==3}" th:href="@{'/notification/'+${notification.id}}"
                                        th:text="${notification.outerTitle}"></a>
                                     <span class="label label-danger" th:if="${notification.status==0}">未读</span>
                                     <div class="text-color-999"
                                          th:text="${#dates.format(notification.gmtCreate,'yyyy-MM-dd HH:mm')}"></div>
                                 </div>
-                                <hr>
                             </div>
                         </div>
                     </div>

@@ -39,12 +39,14 @@
             </div>
         </div>
     </form>
-    <!--    <xblock>-->
-    <!--        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>-->
-    <!--        <button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加-->
-    <!--        </button>-->
-    <!--    </xblock>-->
-    <span class="x-right" style="line-height:40px" th:text="${'共有数据'+count+'条'}">共有数据：8 条</span>
+        <xblock>
+<!--            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>-->
+<!--            <button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加-->
+            </button>
+            <div style="height: 38px;">
+                <span class="x-right" style="line-height:40px" th:text="${'共有数据'+count+'条'}"></span>
+            </div>
+        </xblock>
     <table class="layui-table">
         <thead>
         <tr>

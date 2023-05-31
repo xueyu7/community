@@ -291,10 +291,14 @@ p {
     margin-left: 3px;
 }
 
-.index-find{
+.index-find {
     margin-left: 5px;
 }
 
-.glyphicon-list{
+.glyphicon-list {
     color: #99cfff;
+}
+
+.media {
+    border-bottom: 1px solid #eeeeee;
 }

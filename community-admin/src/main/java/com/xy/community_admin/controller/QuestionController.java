@@ -29,6 +29,11 @@ public class QuestionController {
         return "/question-list";
     }
 
+    @GetMapping("/question-add")
+    public String add(Model model) {
+        return "/question-add";
+    }
+
     @ResponseBody
     @PostMapping("/deleteQuestion")
     private void delete(@RequestBody DelDTO delDTO) {

@@ -15,6 +15,7 @@ public class Question {
     private Integer creator;
     private Integer viewCount;
     private Integer commentCount;
+    private Integer sticky;
 
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;

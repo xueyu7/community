@@ -15,4 +15,5 @@ public interface QuestionDao extends BaseMapper<Question> {
 
     List<Question> selectRelated(Question question);
 
+    List<Question> selectSticky();
 }

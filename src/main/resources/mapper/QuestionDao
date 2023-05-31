@@ -5,15 +5,18 @@
 
 <mapper namespace="com.xy.community.dao.QuestionDao">
     <select id="selectRelated" resultType="com.xy.community.model.Question">
-        select * from question where id!=#{id} and tag regexp #{tag}
+        select * from question where id!=#{id} and tag regexp #{tag} and deleted=0
     </select>
     <select id="countBySearch" resultType="java.lang.Integer">
         select count(*) from question
         <where>
             <if test="search!=null">
-                and title=#{search}
+                and title=#{search} and deleted=0
             </if>
         </where>
+    </select>
+    <select id="selectSticky" resultType="com.xy.community.model.Question">
+        select * from question where sticky > 0 and deleted=0 order by sticky desc, gmt_create desc
     </select>
     <update id="incView" parameterType="com.xy.community.model.Question">
         update question set view_count=view_count+1 where id=#{id}

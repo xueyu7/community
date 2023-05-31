@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -24,7 +25,9 @@ public class QuestionService {
     public List<QuestionDTO> selectList(String select, String search) {
         QueryWrapper<Question> wrapper = new QueryWrapper<>();
         if (StringUtils.isNotEmpty(search) || StringUtils.isNotEmpty(select)) {
-            wrapper.like(select, search);
+            if (!select.equals("creator")){
+                wrapper.like(select, search);
+            }
         }
         List<Question> questions = questionDao.selectList(wrapper);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
@@ -34,6 +37,9 @@ public class QuestionService {
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
+        }
+        if (StringUtils.isNotEmpty(select)&&select.equals("creator")){
+            questionDTOList = questionDTOList.stream().filter(questionDTO -> questionDTO.getUser().getName().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
         }
         return questionDTOList;
     }
