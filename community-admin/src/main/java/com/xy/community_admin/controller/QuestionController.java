@@ -2,6 +2,7 @@ package com.xy.community_admin.controller;
 
 import com.xy.community_admin.dto.DelDTO;
 import com.xy.community_admin.dto.QuestionDTO;
+import com.xy.community_admin.dto.StickyDTO;
 import com.xy.community_admin.model.Question;
 import com.xy.community_admin.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,14 @@ public class QuestionController {
 
     @ResponseBody
     @PostMapping("/deleteQuestion")
-    private void delete(@RequestBody DelDTO delDTO) {
+    public void delete(@RequestBody DelDTO delDTO) {
         questionService.deleteById(delDTO.getId());
+    }
+
+    @ResponseBody
+    @PostMapping("/stickyQuestion")
+    public void sticky(@RequestBody StickyDTO stickyDTO) {
+        questionService.sticky(stickyDTO.getId(),stickyDTO.getSticky());
     }
 
     @GetMapping("/question-del")

@@ -83,12 +83,16 @@
             <td th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></td>
             <td th:text="${#dates.format(question.gmtModified,'yyyy-MM-dd HH:mm')}"></td>
             <td class="td-status">
-                <span class="layui-btn layui-btn-disabled layui-btn-mini">普通</span>
+                <span th:if="${question.sticky==0}" class="layui-btn layui-btn-disabled layui-btn-mini">普通</span>
+                <span th:if="${question.sticky==1}" class="layui-btn layui-btn-normal layui-btn-mini">置顶</span>
             </td>
             <td class="td-manage">
-                <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="置顶"
-                   th:data-id="${question.id}"><i class="layui-icon">&#xe62f;</i>
-                </a>
+                <a th:if="${question.sticky==0}" style="text-decoration:none" onclick="member_start(this)"
+                   href="javascript:;" title="置顶"
+                   th:data-id="${question.id}"><i class="layui-icon">&#xe62f;</i> </a>
+                <a th:if="${question.sticky==1}" style="text-decoration:none" onclick="member_stop(this)"
+                   href="javascript:;" title="取消置顶"
+                   th:data-id="${question.id}"><i class="layui-icon">&#xe601;</i></a>
                 <!--<a title="展示" href="javascript:;" onclick="question_edit('展示','question-show','4','','510')"
                    class="ml-5" style="text-decoration:none"><span style="font-size: 12px;">[展示]</span>
                     &lt;!&ndash;<i class="layui-icon">&#xe642;</i>&ndash;&gt;
@@ -170,9 +174,22 @@
 
     /*问题-取消置顶*/
     function member_stop(obj) {
+        var id = obj.getAttribute("data-id");
         layer.confirm('确认要取消置顶吗？', function (index) {
-            //发异步把用户状态进行更改
-
+            //发异步把问题状态进行更改
+            $.ajax({
+                type: "POST",
+                url: "/stickyQuestion",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "id": id,
+                    "sticky": 0
+                }),
+                success: function (response) {
+                    console.log(response)
+                },
+                dataType: "json"
+            });
             $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this)" href="javascript:;" title="置顶"><i class="layui-icon">&#xe62f;</i></a>');
             $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">普通</span>');
             $(obj).remove();
@@ -182,9 +199,22 @@
 
     /*问题-置顶*/
     function member_start(obj) {
+        var id = obj.getAttribute("data-id");
         layer.confirm('确认要置顶吗？', function (index) {
-            //发异步把用户状态进行更改
-
+            //发异步把问题状态进行更改
+            $.ajax({
+                type: "POST",
+                url: "/stickyQuestion",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "id": id,
+                    "sticky": 1
+                }),
+                success: function (response) {
+                    console.log(response)
+                },
+                dataType: "json"
+            });
             $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this)" href="javascript:;" title="取消置顶"><i class="layui-icon">&#xe601;</i></a>');
             $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">置顶</span>');
             $(obj).remove();

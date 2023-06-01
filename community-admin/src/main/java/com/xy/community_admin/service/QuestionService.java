@@ -64,4 +64,11 @@ public class QuestionService {
     public void deleteAll() {
         questionDao.deleteAll();
     }
+
+    public void sticky(Integer id, Integer sticky) {
+        Question question=new Question();
+        question.setId(id);
+        question.setSticky(sticky);
+        questionDao.updateById(question);
+    }
 }

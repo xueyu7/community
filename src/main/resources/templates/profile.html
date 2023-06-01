@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/common.css">
-
+    <script src="/js/unread.js"></script>
 </head>
 <body>
 <div th:insert="navigation :: nav"></div>
@@ -127,7 +127,7 @@
                                 <li>
                                     <a href="/profile/replies" th:class="${section=='replies'}?'active':''">
                                         <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-                                        <i></i>最新回复<span class="badge" th:text="${session.unreadCount}"></span>
+                                        <i></i>最新回复<span class="badge" id="unread" th:text="${session.unreadCount}"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -137,6 +137,7 @@
             </div>
         </div>
     </div>
-    <div th:insert="footer::footer"></div>
+</div>
+<div th:insert="footer::footer"></div>
 </body>
 </html>

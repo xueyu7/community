@@ -42,7 +42,7 @@ public class NotificationController {
     @GetMapping("/notification-add")
     public String add(Model model) {
         List<User> users = userDao.selectList(null);
-        model.addAttribute("users",users);
+        model.addAttribute("users", users);
         return "/notification-add";
     }
 
