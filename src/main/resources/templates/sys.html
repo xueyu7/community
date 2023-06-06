@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>系统通知</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <script src="/js/unread.js"></script>
+</head>
+<body>
+<div th:insert="navigation :: nav"></div>
+<div class="aw-container-wrap">
+    <div class="container aw-publish">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content">
+                    <ul class="nav nav-tabs aw-nav-tabs active">
+                        <h2><span>系统通知</span></h2>
+                    </ul>
+                    <div class="aw-mod aw-mod-publish">
+                        <div class="mod-body">
+                            <div class="aw-item">
+                                <div style="margin: 20px">
+                                    来自管理员 <a href="" th:text="${notification.notifierName}"></a>：<br><br>
+                                    <p th:text="${notification.outerTitle}"></p>
+                                    <p class="text-color-999"
+                                       th:text="${#dates.format(notification.gmtCreate,'yyyy-MM-dd HH:mm')}"></p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+                    <div class="aw-mod side-nav">
+                        <div class="mod-head">
+                        </div>
+                        <div class="mod-body">
+                            <ul class="list-group">
+                                <li>
+                                    <a href="/profile/questions">
+                                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                        <i></i>我的提问
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/profile/replies">
+                                        <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                                        <i></i>最新回复<span class="badge" id="unread"
+                                                         th:text="${session.unreadCount}"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="footer::footer"></div>
+</body>
+</html>

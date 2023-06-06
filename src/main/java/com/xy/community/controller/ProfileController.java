@@ -1,6 +1,7 @@
 package com.xy.community.controller;
 
 import com.xy.community.dto.PaginationDTO;
+import com.xy.community.model.Notification;
 import com.xy.community.model.User;
 import com.xy.community.service.NotificationService;
 import com.xy.community.service.QuestionService;
@@ -43,9 +44,14 @@ public class ProfileController {
             model.addAttribute("sectionName", "最新回复");
             PaginationDTO paginationDTO = notificationService.list(page, size, user.getId());
             model.addAttribute("pagination", paginationDTO);
-        } else if (action.equals("sys")) {
-            //待完成   系统通知页面
         }
         return "profile";
+    }
+
+    @GetMapping("/sys/{id}")
+    public String profile(@PathVariable(name = "id") String id, Model model) {
+        Notification notification = notificationService.list(id);
+        model.addAttribute("notification", notification);
+        return "sys";
     }
 }

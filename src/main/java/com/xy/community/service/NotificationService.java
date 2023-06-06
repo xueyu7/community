@@ -48,6 +48,11 @@ public class NotificationService {
         return paginationDTO;
     }
 
+    public Notification list(String id) {
+        Notification notification = notificationDao.selectById(id);
+        return notification;
+    }
+
     public Integer unreadCount(Integer userId) {
         QueryWrapper<Notification> wrapper = new QueryWrapper<>();
         wrapper.eq("status", 0)
@@ -72,4 +77,5 @@ public class NotificationService {
         notificationDTO.setTypeName(NotificationTypeEnum.nameOf(notification.getType()));
         return notificationDTO;
     }
+
 }

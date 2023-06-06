@@ -29,8 +29,7 @@ public class NotificationController {
                 || NotificationTypeEnum.REPLY_COMMENT.getType() == notificationDTO.getType()) {
             return "redirect:/question/" + notificationDTO.getOuterId();
         }else if (NotificationTypeEnum.REPLY_SYS.getType() == notificationDTO.getType()){
-            //待完成   系统通知页面跳转
-            return "redirect:/profile/sys/"+id;
+            return "redirect:/sys/"+id;
         }
         else {
             return "redirect:/";
