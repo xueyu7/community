@@ -25,13 +25,15 @@ public class NotificationController {
             return "redirect:/";
         }
         NotificationDTO notificationDTO = notificationService.read(id, user);
+        //读完之后直接更新session里的未读数——读完消息后不更新消息数bug
+        Integer unreadCount = notificationService.unreadCount(user.getId());
+        request.getSession().setAttribute("unreadCount", unreadCount);
         if (NotificationTypeEnum.REPLY_QUESTION.getType() == notificationDTO.getType()
                 || NotificationTypeEnum.REPLY_COMMENT.getType() == notificationDTO.getType()) {
             return "redirect:/question/" + notificationDTO.getOuterId();
-        }else if (NotificationTypeEnum.REPLY_SYS.getType() == notificationDTO.getType()){
-            return "redirect:/sys/"+id;
-        }
-        else {
+        } else if (NotificationTypeEnum.REPLY_SYS.getType() == notificationDTO.getType()) {
+            return "redirect:/sys/" + id;
+        } else {
             return "redirect:/";
         }
     }

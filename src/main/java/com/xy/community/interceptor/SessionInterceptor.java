@@ -34,7 +34,7 @@ public class SessionInterceptor implements HandlerInterceptor {
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
                         Integer unreadCount = notificationService.unreadCount(user.getId());
-                        request.getSession().setAttribute("unreadCount",unreadCount);
+                        request.getSession().setAttribute("unreadCount", unreadCount);
                     }
                     break;
                 }

@@ -22,7 +22,7 @@ public class LoginController {
     private AdminDao adminDao;
 
     @GetMapping("/login")
-    public String show(){
+    public String show() {
         return "/login";
     }
 
@@ -31,30 +31,31 @@ public class LoginController {
                         @RequestParam(name = "password") String password,
                         HttpServletRequest request,
                         Model model) {
-        if (StringUtils.isNotEmpty(username)&&StringUtils.isNotEmpty(password)){
+        if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)) {
             QueryWrapper<Admin> wrapper = new QueryWrapper<>();
             wrapper.eq("username", username)
                     .eq("password", password);
             Admin admin = adminDao.selectOne(wrapper);
-            if (admin==null){
-                model.addAttribute("error","用户名或密码不正确");
+            if (admin == null) {
+                model.addAttribute("error", "用户名或密码不正确");
                 return "/login";
-            }else {
+            } else {
 //                Cookie cookie = new Cookie("username", username);
 //                cookie.setMaxAge(60);
 //                response.addCookie(cookie);
-                request.getSession().setAttribute("username",username);
+                request.getSession().setAttribute("username", username);
+                request.getSession().setMaxInactiveInterval(60 * 60);
 //                request.getSession().setAttribute("id",admin.getId());
                 return "redirect:/";
             }
-        }else {
-            model.addAttribute("error","用户名或密码不能为空");
+        } else {
+            model.addAttribute("error", "用户名或密码不能为空");
             return "/login";
         }
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return "redirect:login";
     }

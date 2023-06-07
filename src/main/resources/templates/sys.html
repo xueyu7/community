@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/common.css">
-    <script src="/js/unread.js"></script>
 </head>
 <body>
 <div th:insert="navigation :: nav"></div>
@@ -23,7 +22,7 @@
                     </ul>
                     <div class="aw-mod aw-mod-publish">
                         <div class="mod-body">
-                            <div class="aw-item">
+                            <div class="aw-item aw-item-sys">
                                 <div style="margin: 20px">
                                     来自管理员 <a href="" th:text="${notification.notifierName}"></a>：<br><br>
                                     <p th:text="${notification.outerTitle}"></p>

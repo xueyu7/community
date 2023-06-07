@@ -13,17 +13,20 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String uri = request.getRequestURI();
-        if (uri.contains("/login")||uri.contains("/")) {
-            return true;
-        } else {
-            if (request.getSession().getAttribute("userName") != null) {
-                return true;
-            } else {
-                response.sendRedirect(request.getContextPath() + "/login");
-                return false;
-            }
-        }
+//        String uri = request.getRequestURI();
+//        if (uri.contains("/login")||uri.contains("/")) {
+//            return true;
+//        } else {
+//            if (request.getSession().getAttribute("userName") != null) {
+//                return true;
+//            } else {
+//                response.sendRedirect(request.getContextPath() + "/login");
+//                return false;
+//            }
+//        }
+
+        if (request.getSession().getAttribute("username") != null) return true;
+        else return false;
     }
 
     @Override

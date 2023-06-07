@@ -40,6 +40,9 @@ public class ProfileController {
             PaginationDTO paginationDTO = questionService.list(page, size, user.getId());
             model.addAttribute("pagination", paginationDTO);
         } else if (action.equals("replies")) {
+            //访问时更新——管理端新增消息通知
+            Integer unreadCount = notificationService.unreadCount(user.getId());
+            request.getSession().setAttribute("unreadCount", unreadCount);
             model.addAttribute("section", "replies");
             model.addAttribute("sectionName", "最新回复");
             PaginationDTO paginationDTO = notificationService.list(page, size, user.getId());
@@ -49,7 +52,8 @@ public class ProfileController {
     }
 
     @GetMapping("/sys/{id}")
-    public String profile(@PathVariable(name = "id") String id, Model model) {
+    public String profile(@PathVariable(name = "id") String id,
+                          Model model) {
         Notification notification = notificationService.list(id);
         model.addAttribute("notification", notification);
         return "sys";

@@ -74,9 +74,6 @@
         form.on('submit(add)', function (data) {
             var content = $("#L_content").val();
             var receiver = $("#select").val();
-            alert(content)
-            alert(receiver)
-            console.log(data);
             //发异步，把数据提交给php
             $.ajax({
                 type: "POST",
