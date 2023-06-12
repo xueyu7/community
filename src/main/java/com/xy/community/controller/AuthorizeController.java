@@ -28,8 +28,7 @@ public class AuthorizeController {
     public String callback(@PathVariable(name = "type") String type,
                            @RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletResponse response,
-                           HttpServletRequest request) {
+                           HttpServletResponse response) {
         UserStrategy userStrategy = userStrategyFactory.getStrategy(type);
         LoginUserInfo loginUserInfo = userStrategy.getUser(code, state);
         if (loginUserInfo != null) {

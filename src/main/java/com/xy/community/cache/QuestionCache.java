@@ -19,10 +19,10 @@ public class QuestionCache {
     @Autowired
     private UserDao userDao;
 
-    public List<QuestionDTO> getStickies(){
+    public List<QuestionDTO> getStickies() {
         List<Question> questions = questionDao.selectSticky();
-        if (questions!=null&&questions.size()!=0){
-            List<QuestionDTO> questionDTOS=new ArrayList<>();
+        if (questions != null && questions.size() != 0) {
+            List<QuestionDTO> questionDTOS = new ArrayList<>();
             for (Question question : questions) {
                 User user = userDao.selectById(question.getCreator());
                 QuestionDTO questionDTO = new QuestionDTO();
